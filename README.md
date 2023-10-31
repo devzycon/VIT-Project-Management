@@ -13,3 +13,5 @@ Component 1: Faculty
 
 Component 2 : Teacher
   - Faculty verification with ID (future work)
+
+Assigned to: Vishal P
