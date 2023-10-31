@@ -1,0 +1,36 @@
+git add -> Stage files to git (edits, new files, etc.)
+
+git reset [filename]-> Unstage (un-add) files from git
+git reset HEAD~1 -> Undo last commit (head is pointer to last commit, ~1 = point to next commit aka. nothing)
+git reset [commitHash] -> Unstage commits from previous commit (code not changed)
+git reset --hard [commitHash] -> Undoes and unstages commits (code goes back in to that commit)
+
+git commit -> Save changes to project
+git commit -am -> Adds and Commits [only for modified files]
+git push -> Save changes to a repo (GitHub)
+
+git status -> Current status of working tree
+git log -> display commit history and commitHashes (
+
+
+# VERIFICATION PROCESS [do only once]
+- Generate Key [public and private] > ssh-keygen -t rsa -b 4096 -C "youremail@gmail.com"
+- Upload public key to your GitHub account
+- For private key go to Git installation folder and Run SSH Agent application
+- dir * | findstr mykey (to find the key file)
+- cmd "type" command opens the file contents
+
+
+# TO PUSH A PROJECT INTO A EMPTY GITHUB REPO (Make sure git is initialized in your local project file)
+- > git remote add origin [repo link]
+Make sure its connected to the repo using 
+- > git remote -v
+
+
+# BRANCHES
+- To view all branches > git branch
+- To switch between branches > git checkout YourBranchName
+- To create new branch > git checkout -b YourBranchName
+- To delete branch git branch --delete YourBranchName
+- To delete branch after merging > git branch -d YourBranchName
+- To pull changes into your clone > git pull origin main ->this will update to your clone to whatever is in the main branch
