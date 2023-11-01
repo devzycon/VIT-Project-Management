@@ -94,7 +94,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <style>
+      body
+        {
+        
+        background-repeat: no-repeat;
+        background-size: 75%;
+        }
+      #heade{
+        background-color: #2865b0;
+        height: 50px !important;
+        
+      }
+      #vit{
+        font-size: 30px;
+      }
+
+      #faculty{
+        color: #2865b0;
+      }
+      #vit{
+        color: white;
+      }
+      #logo{
+        height: 50%;
+        width: 50%;
+      }
+      #log{
+        padding-top:20px;
+      }
+     
+    </style>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="icon" type="image/png" href="images/favicon.png"/>
@@ -104,48 +135,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Admin Login | Coding Cush</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#" style="font-size:30px;"><strong>Teacher Login</strong></a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul> -->
-    <form class="form-inline my-2 my-lg-0">
-      <a href="register.php"class="btn btn-success my-2 my-sm-0" style="margin-left:700px;" type="submit">Create Account</a>
-    </form>
-  </div>
-</nav>
-
+    
+  <div id="heade">
+   
+  <center>
+    <h1 id="vit">Faculty Login</h1>
+    </center>
+    
+  <div>
+  <div id="log">
     <div class="container my-4">
 
     <div class="card mx-auto" style="width: 20rem;"><br>
-  <img class="card-img-top mx-auto" src="https://cdn-icons-png.flaticon.com/512/206/206897.png" style="width: 60%; " alt="Card image cap"> 
- 
-  <div class="card-body">
-
+    
+<div class="card-body" >
+<center>
+  <h3 id="faculty">Faculty Login<h3>
+    </center>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
@@ -156,16 +162,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
+                <a href='#'  style="padding-left: 170px; color: black;  font-size: small ; align-text: right !important;" >Forgot Password ?</a>
             </div>
-            
- <button type="submit" class="btn btn-warning"><i class="fa fa-lock">&nbsp;</i> Login</button> &nbsp; &nbsp; 
-  <button type="reset" class="btn btn-danger "><i class="fa fa-repeat">&nbsp;</i> Reset</button>
+            <center>
+            <button type="submit" class="btn btn-warning"><i class="fa fa-lock">&nbsp;</i> Login</button>
+    </center>
         
          
         </form>
   </div>
-  <div class="card-footer"><a href="#">Forget Password </a></div>
+  <div class="card-footer"><a  href="register.php" type="submit">Create Account</a></div>
+    </div>
 </div>
+<!-- <center>
+<img src='C.png' id="logo">
+    </center> -->
     </div>
 
     <!--footer section-->
