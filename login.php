@@ -105,8 +105,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#" style="font-size:30px;"><strong>Coding Cush</strong></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#" style="font-size:30px;"><strong>Teacher Login</strong></a>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -132,9 +132,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
-    </ul>
+    </ul> -->
     <form class="form-inline my-2 my-lg-0">
-      <a href="register.php"class="btn btn-success my-2 my-sm-0" type="submit">Create Account</a>
+      <a href="register.php"class="btn btn-success my-2 my-sm-0" style="margin-left:700px;" type="submit">Create Account</a>
     </form>
   </div>
 </nav>
@@ -142,7 +142,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container my-4">
 
     <div class="card mx-auto" style="width: 20rem;"><br>
-  <img class="card-img-top mx-auto" src="https://icon-library.com/images/admin-login-icon/admin-login-icon-15.jpg" style="width: 60%; " alt="Card image cap">
+  <img class="card-img-top mx-auto" src="https://cdn-icons-png.flaticon.com/512/206/206897.png" style="width: 60%; " alt="Card image cap"> 
+ 
   <div class="card-body">
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
