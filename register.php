@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       }
       #vit{
         font-size: 30px;
-        font-style: 
+        
       }
 
       #faculty{
