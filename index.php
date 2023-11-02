@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
 	$u_email = $_POST['user_email'];
 	$u_phone = $_POST['user_phone'];
 	$u_project_type = $_POST['project_type'];
-	//$u_staff_id = $_POST['staff_id'];
+// removed some unnecessary variables and img 
 
 	$msg = "";
 
@@ -71,7 +71,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 	<div class="container">
 <!-- <a href="https://lexacademy.in" target="_blank"><img src="https://codingcush.com/uploads/logo/logo_61b79976c34f5.png" alt="" width="350px" ></a><br><hr> -->
-
+<!-- commented out the logo so it can be modified later on -->
 <!-- adding alert notification  -->
 <?php
 	if($added){
@@ -97,6 +97,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 		<table class="table table-bordered table-striped table-hover" id="myTable">
 <thead>
     <tr>
+        <!-- removed some unnecessary trs, changed names of some trs and added in project type  -->
         <th class="text-center" scope="col" id="serial">S.L</th>
         <th class="text-center" scope="col">Student Name</th>
         <th class="text-center" scope="col">Register Number</th>
@@ -123,9 +124,8 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 				$u_f_name = $row['u_f_name'];
 				$u_l_name = $row['u_l_name'];
 				$u_phone = $row['u_phone'];
-				//$u_staff_id = $row['staff_id'];
 				$u_project_type = $row['u_project_type'];
-        		//$image = $row['image'];
+        		// removed some unnecessary variables
 
         		echo "
 
@@ -157,19 +157,19 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         	}
            
         	    ?> 
-    
+    <!-- added javascript to constraint form submissions to 5 -->
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
         // If slValue is greater than 5, disable the button
         document.getElementById("submitBtn").disabled = true;
         // Optionally, you can display an alert message
-        alert("You have reached the maximum limit of form submissions (5 times).");
+        
     }
 </script>
 
 			
-			
+			<!-- commented out export data button for now -->
 		</table>
 		<!-- <form method="post" action="export.php">
      <input type="submit" name="export" class="btn btn-success" value="Export Data" />
@@ -198,8 +198,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         <form method="POST" enctype="multipart/form-data" action="process_form.php">
         <input type="hidden" name="token" value="<?php echo $_SESSION['form_token']; ?>">
 			
-			<!-- This is test for New Card Activate Form  -->
-			<!-- This is Address with email id  -->
+			<!-- removed some unnecessary input fields and added in project type -->
 <div class="form-row">
 <div class="form-group col-md-6">
 <label for="inputEmail4">Student Id.</label>
@@ -245,7 +244,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="submitBtn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
       </div>
     </div>
 
@@ -255,7 +254,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 <!------DELETE modal---->
 
-
+<!-- commented out delete modal -->
 
 
 <!-- Modal -->
@@ -301,6 +300,7 @@ while($row = mysqli_fetch_array($run_data))
 <?php 
 
 // <!-- profile modal start -->
+//added in poject type and removed some unnecessary variables
 $get_data = "SELECT * FROM student_data";
 $run_data = mysqli_query($con, $get_data);
 
@@ -311,9 +311,8 @@ while ($row = mysqli_fetch_array($run_data)) {
     $u_email = $row['u_email'];
     $u_phone = $row['u_phone'];
     $u_project_type = $row['u_project_type'];
-    //$image = $row['image'];
-    $id = $row['id']; // Assuming 'id' is the primary key of your student_data table
-
+   
+    $id = $row['id']; 
     echo "
         <div class='modal fade' id='view$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
             <div class='modal-dialog'>
@@ -363,7 +362,7 @@ while ($row = mysqli_fetch_array($run_data)) {
 
 
 
-
+<!-- edit button is not working  -->
 <!----edit Data--->
 
 <?php
