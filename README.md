@@ -1,4 +1,3 @@
-# VIT-Project-Mangement
 # Student Project Management System
 
 # Faculty Component:
