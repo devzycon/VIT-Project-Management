@@ -147,23 +147,18 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 				<td class='text-left'>$u_card</td>
 				<td class='text-left'>$u_phone</td>
 				<td class='text-center'>$u_project_type</td>
-                <td class='text-center'>$u_review_0</td>
-                
-                <td class='text-center'>$u_review_1</td>
-                <td class='text-center'>$u_review_2</td>
-                
-                
+                <td class='text-center'>
+					<span>
+					    <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#myModal2'>View</button>
+					</span>
+				</td>
+                <td class='text-center'>-NA-</td>
+                <td class='text-center'>-NA-</td>
 				<td class='text-center'>
 					<span>
 					<a href='#' class='btn btn-warning mr-3 edituser' data-toggle='modal' data-target='#edit$id' title='Edit'><i class='fa fa-pencil-square-o fa-lg'></i></a>
-
-					     
-					    
 					</span>
-					
-				</td>
-                
-				 
+				</td> 
 			</tr>
             
             
@@ -269,6 +264,82 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 </div>
 
 
+<!-- my model 2 -->
+
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		<!-- <center><img src="https://codingcush.com/uploads/logo/logo_61b79976c34f5.png" width="300px" height="80px" alt=""></center> -->
+    
+      </div>
+      <div class="modal-body">
+      <?php
+
+
+        ?>
+        <form method="POST" enctype="multipart/form-data" action="process_form.php">
+        <input type="hidden" name="token" value="<?php echo $_SESSION['form_token']; ?>">
+			
+			<!-- This is test for New Card Activate Form  -->
+			<!-- This is Address with email id  -->
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="inputEmail4">Student Id.</label>
+<input type="text" class="form-control" name="card_no" placeholder="Enter 12-digit Student Id." maxlength="12" required>
+</div>
+<div class="form-group col-md-6">
+<label for="inputPassword4">Mobile No.</label>
+<input type="text" class="form-control" name="user_phone" placeholder="Enter 10-digit Mobile no." maxlength="10" required >
+</div>
+</div>
+
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="firstname">First Name</label>
+<input type="text" class="form-control" name="user_first_name" placeholder="Enter First Name">
+</div>
+<div class="form-group col-md-6">
+<label for="lastname">Last Name</label>
+<input type="text" class="form-control" name="user_last_name" placeholder="Enter Last Name">
+</div>
+</div>
+
+
+
+<div class="form-row" style="color: skyblue;">
+<div class="form-group col-md-6">
+<label for="email">Email Id</label>
+<input type="email" class="form-control" name="user_email" placeholder="Enter Email id">
+</div>
+<div class="form-group col-md-6">
+<label for="project_type">Project Type:</label>
+        <select id="project_type" name="project_type" class="form-control">
+            <option value="In House">In House</option>
+			<option value="PAT">PAT</option>
+
+</div>
+
+            
+        	 <input type="submit" name="submit" class="btn btn-info btn-large" value="Submit">
+        	
+			
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 <!------DELETE modal---->
 
 
@@ -367,7 +438,11 @@ while ($row = mysqli_fetch_array($run_data)) {
             </div>
         </div> 
     ";
+
+
 }
+
+
 
 
 
@@ -376,8 +451,6 @@ while ($row = mysqli_fetch_array($run_data)) {
 
 
 ?>
-
-
 
 
 
@@ -429,6 +502,8 @@ while ($row = mysqli_fetch_array($run_data)) {
 
 
 ?>
+
+
 
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>

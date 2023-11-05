@@ -55,7 +55,7 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['form_token']) {
 
   		echo "Data not insert";
   	}
-    }
+	}
 
 
         // Check if form submissions limit is reached
