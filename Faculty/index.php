@@ -55,7 +55,11 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 
 
+<!-- MODAL BUG 
+ ISSUE:
 
+
+-->
 
 <!DOCTYPE html>
 <html>
