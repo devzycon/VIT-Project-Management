@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
 	$u_l_name = $_POST['user_last_name'];
 	$u_email = $_POST['user_email'];
 	$u_phone = $_POST['user_phone'];
-	$u_project_type = $_POST['project_type'];
+	$u_project_type = $_POST['project'];
     $u_review_0 = $_POST['review_0']; //added three new variables
     $u_review_1 = $_POST['review_1'];
     $u_review_2 = $_POST['review_2'];
@@ -131,13 +131,11 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 				$u_f_name = $row['u_f_name'];
 				$u_l_name = $row['u_l_name'];
 				$u_phone = $row['u_phone'];
-				//$u_staff_id = $row['staff_id'];
 				$u_project_type = $row['u_project_type'];
-                // display values in the table from the database of review 0, 1 and 2 (values are null now because database has no column as review 0 , 1 and 2) 
                 $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : "";
                 $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
-        		//$image = $row['image'];
+        		
 
         		echo "
 
@@ -316,7 +314,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 <label for="email">Email Id</label>
 <input type="email" class="form-control" name="user_email" placeholder="Enter Email id">
 </div>
-<div class="form-group col-md-6">
+<div class="form-group col-md-2">
 <label for="project_type">Project Type:</label>
         <select id="project_type" name="project_type" class="form-control">
             <option value="In House">In House</option>
@@ -325,12 +323,13 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 </div>
 
             
-        	 <input type="submit" name="submit" class="btn btn-info btn-large" value="Submit">
+        	
         	
 			
         </form>
       </div>
       <div class="modal-footer">
+      <input type="submit" name="submit" class="btn btn-info btn-large" value="Submit">
         <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -340,168 +339,104 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 
 
-<!------DELETE modal---->
 
 
 
 
-<!-- Modal -->
-
-<?php
-/*
-$get_data = "SELECT * FROM student_data";
-$run_data = mysqli_query($con,$get_data);
-
-while($row = mysqli_fetch_array($run_data))
-{
-	$id = $row['id'];
-	echo "
-
-<div id='$id' class='modal fade' role='dialog'>
-  <div class='modal-dialog'>
-
-    <!-- Modal content-->
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal'>&times;</button>
-        <h4 class='modal-title text-center'>Are you want to sure??</h4>
-      </div>
-      <div class='modal-body'>
-        <a href='delete.php?id=$id' class='btn btn-danger' style='margin-left:250px'>Delete</a>
-      </div>
-      
-    </div>
-
-  </div>
-</div>
-
-
-	";
-	
-}
-
-*/
-?>
-
-
-<!-- View modal  -->
-<?php 
-
-// <!-- profile modal start -->
-$get_data = "SELECT * FROM student_data";
-$run_data = mysqli_query($con, $get_data);
-
-while ($row = mysqli_fetch_array($run_data)) {
-    $u_card = $row['u_card'];
-    $u_f_name = $row['u_f_name'];
-    $u_l_name = $row['u_l_name'];
-    $u_email = $row['u_email'];
-    $u_phone = $row['u_phone'];
-    $u_project_type = $row['u_project_type'];
-    $u_project_type = $row['u_project_type'];
-    //$image = $row['image'];
-    $id = $row['id']; // Assuming 'id' is the primary key of your student_data table
-
-    echo "
-        <div class='modal fade' id='view$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
-            <div class='modal-dialog'>
-                <div class='modal-content'>
-                    <div class='modal-header'>
-                        <h5 class='modal-title' id='exampleModalLabel'>Profile <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
-                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div>
-                    <div class='modal-body'>
-                        <div class='container' id='profile'> 
-                            <div class='row'>
-                                <div class='col-sm-4 col-md-2'>
-                                    <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
-                                    <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
-                                    Project Type: $u_project_type
-                                </div>
-                                <div class='col-sm-3 col-md-6'>
-                                    <h3 class='text-primary'>$u_f_name $u_l_name</h3>
-                                    <p class='text-secondary'>
-                                        <i class='fa fa-envelope-o' aria-hidden='true'></i> $u_email
-                                        <br />
-                                    </p>
-                                    <!-- Split button -->
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-                    <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> 
-    ";
-
-
-}
-
-
-
-
-
-
-// <!-- profile modal end -->
-
-
-?>
 
 
 
 <!----edit Data--->
 
 <?php
-
 $get_data = "SELECT * FROM student_data";
 $run_data = mysqli_query($con, $get_data);
 
 while ($row = mysqli_fetch_array($run_data)) {
-    $id = $row['id']; // Assuming 'id' is the primary key of your student_data table
-    $u_card = $row['u_card'];
-    $u_f_name = $row['u_f_name'];
-    $u_l_name = $row['u_l_name'];
-    $u_email = $row['u_email'];
-    $u_phone = $row['u_phone'];
-    $u_project_type = $row['u_project_type'];
-
+    $id = $row['id'];
+    $card = $row['u_card'];
+    $name = $row['u_f_name'];
+    $name2 = $row['u_l_name'];
+    $email = $row['u_email'];
+    $phone = $row['u_phone'];
+    $project = $row['u_project_type'];
     echo "
-        <div id='edit$id' class='modal fade' role='dialog'>
-            <div class='modal-dialog'>
-
-                <!-- Modal content-->
-                <div class='modal-content'>
-                    <div class='modal-header'>
-                        <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                        <h4 class='modal-title text-center'>Edit Student Data</h4> 
-                    </div>
-
-                    <div class='modal-body'>
-                        <form action='edit.php?id=$id' method='post' enctype='multipart/form-data'>
-                            <!-- Your form fields here, pre-filled with student data -->
-                        </form>
-                    </div>
-
-                    <div class='modal-footer'>
-                        <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
-                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                    </div>
-                </div>
-
-            </div>
+    <div id='edit$id' class='modal fade' role='dialog'>
+    <div class='modal-dialog'>
+  
+      <!-- Modal content-->
+      <div class='modal-content'>
+        <div class='modal-header'>
+               <button type='button' class='close' data-dismiss='modal'>&times;</button>
+               <h4 class='modal-title text-center'>Edit your Data</h4> 
         </div>
-    ";
-}
-
-
-
-
-?>
+  
+        <div class='modal-body'>
+          <form action='edit.php?id=$id' method='post' enctype='multipart/form-data'>
+  
+          <div class='form-row'>
+          <div class='form-group col-md-6'>
+          <label for='inputEmail4'>Student Id.</label>
+          <input type='text' class='form-control' name='card_no' placeholder='Enter 12-digit Student Id.' maxlength='12' value='$card' required>
+          </div>
+          <div class='form-group col-md-6'>
+          <label for='inputPassword4'>Mobile No.</label>
+          <input type='phone' class='form-control' name='user_phone' placeholder='Enter 10-digit Mobile no.' maxlength='10' value='$phone' required>
+          </div>
+          </div>
+          
+          
+          <div class='form-row'>
+          <div class='form-group col-md-6'>
+          <label for='firstname'>First Name</label>
+          <input type='text' class='form-control' name='user_first_name' placeholder='Enter First Name' value='$name'>
+          </div>
+          <div class='form-group col-md-6'>
+          <label for='lastname'>Last Name</label>
+          <input type='text' class='form-control' name='user_last_name' placeholder='Enter Last Name' value='$name2'>
+          </div>
+          </div>
+          
+      
+          
+          
+          <div class='form-row'>
+          <div class='form-group col-md-6'>
+          <label for='email'>Email Id</label>
+          <input type='email' class='form-control' name='user_email' placeholder='Enter Email id' value='$email'>
+          </div>
+          <div class='form-group col-md-6'>
+          <label for='project_type'>Project Type:</label>
+          <select id='project_type' name='project_type' class='form-control'>
+              <option value='In House' <?php echo ($project == 'In House') ? 'selected' : ''; ?>>In House</option>
+              <option value='PAT' <?php echo ($project == 'PAT') ? 'selected' : ''; ?>>PAT</option>
+              </select>
+          </div>
+          </div>
+          </div>
+       
+      
+              
+               <div class='modal-footer'>
+               <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
+               <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+           </div>
+  
+  
+          </form>
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+  
+  
+      ";
+  }
+  
+  
+  ?>
 
 
 
