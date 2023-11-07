@@ -175,7 +175,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                                                 <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
                                                 Project Type: $u_project_type<br><br>
                                                 Enter Marks: 
-                                                <input type='text' class='form-control' name='review_0_marks' placeholder='Enter Marks.' value='$u_review_0' required>
+                                                <input type='text' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' required>
                                                 <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
                                             </form>
                                         </div>
