@@ -73,7 +73,8 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="jquery.js"></script>
 </head>
 <body>
 
@@ -145,7 +146,6 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         		
 
         		echo "
-
 				<tr>
 				<td class='text-center' id='serial'>$sl</td>
 				<td class='text-left'>$u_f_name   $u_l_name</td>
@@ -170,13 +170,13 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                                 <div class='container' id='profile'> 
                                     <div class='row'>
                                         <div class='col-sm-4 col-md-2'>
-                                            <form action='review0.php?id=$id' method='post' enctype='multipart/form-data'>
+                                            <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
                                                 <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
                                                 <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
                                                 Project Type: $u_project_type<br><br>
                                                 Enter Marks: 
-                                                <input type='text' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' required>
-                                                <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
+                                                <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' required>
+                                                <input type='submit' name='submit' id='submitButton' class='btn btn-info btn-large' value='Submit' onsubmit='disableSubmitButton()'>
                                             </form>
                                         </div>
                                         <div class='col-sm-3'>
@@ -274,8 +274,6 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
   </div>
 				</td> 
 			</tr>
-            
-            
         		";
             
 
@@ -293,6 +291,15 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
     }
 </script>
 
+ <script>
+        function disableSubmitButton() {
+          $(document).on('submit', '#reviewForm', function() {
+              $('#submitButton$id').prop('disabled', true);
+          });
+      }
+</script>
+
+
 			
 			
 		</table>
@@ -300,7 +307,6 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
      <input type="submit" name="export" class="btn btn-success" value="Export Data" />
     </form> -->
 	</div>
-
 
 	<!---Add in modal---->
 
