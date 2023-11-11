@@ -75,6 +75,16 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
+    <style>
+      .small-textbox {
+          width: 50px; 
+          margin-left: 200px;
+      }
+      .marks-align {
+          
+      }
+    </style>
+
 </head>
 <body>
 
@@ -131,19 +141,20 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 			$i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
-				$sl = ++$i;
-				$id = $row['id'];
-				$u_card = $row['u_card'];
-				$u_f_name = $row['u_f_name'];
-				$u_l_name = $row['u_l_name'];
-				$u_phone = $row['u_phone'];
+                $sl = ++$i;
+                $id = $row['id'];
+                $u_card = $row['u_card'];
+                $u_f_name = $row['u_f_name'];
+                $u_l_name = $row['u_l_name'];
+				        $u_phone = $row['u_phone'];
                 $u_email = $row['u_email'];
-				$u_project_type = $row['u_project_type'];
+				        $u_project_type = $row['u_project_type'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $u_review_0 = $row['review_0'];
-        $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
+                $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
+                $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
         		
 
         		echo "
@@ -162,7 +173,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                     <div class='modal-dialog'>
                         <div class='modal-content'>
                             <div class='modal-header'>
-                                <h5 class='modal-title' id='exampleModalLabel'>Profile <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                                <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
@@ -170,25 +181,34 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                             <div class='modal-body'>
                                 <div class='container' id='profile'> 
                                     <div class='row'>
-                                    <div class='col-sm-4 col-md-2'>
-                                    <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
-                                        <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
-                                        <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
-                                        Project Type: $u_project_type<br><br>
-                                        Enter Marks: 
-                                        <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' id='checkm' required>
-                                        <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled>
-                                    </form>
-                                </div>
-                                        <div class='col-sm-3'>
-                                            <h3 class='text-primary'>$u_f_name $u_l_name</h3>
-                                            <p class='text-secondary'>
-                                                <i class='fa fa-envelope-o' aria-hidden='true'></i> $u_email
-                                                <br />
-                                            </p>
-                                            <!-- Split button -->
-                                        </div>
+                                    <div class='col-md-5 offset-md-2'>
+                                    <table class='table table-bordered table-striped table-hover custom-table'>
+                                    <thead>
+                                        <tr>
+                                            <th class='text-center' scope='col'>Student Name</th>
+                                            <th class='text-center' scope='col'>Register Number</th>
+                                            <th class='text-center' scope='col'>Phone Number</th>
+                                            <th class='text-center' scope='col'>Email ID</th>
+                                            <th class='text-center' scope='col'>Project Type</th>
+                                        </tr>
+                                    </thead>
+                                      <tr>
+                                        <td class='text-left'>$u_f_name   $u_l_name</td>
+                                        <td class='text-left'>$u_card</td>
+                                        <td class='text-left'>$u_phone</td>
+                                                <td class='text-center'>$u_email</td>
+                                        <td class='text-center'>$u_project_type</td>
+                                      </tr>
+                                    </table>
+                                    <div class='marks-align'>
+                                      <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
+                                        Enter Marks:<br>
+                                        <label for='u_review_0'><b>Problem Statement / Objective / Solution (5 marks)</b></label>
+                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' width=5px min='1' max='5' id='checkm' required $textboxDisabled><br>
+                                        <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled><br><br> 
+                                      </form>
                                     </div>
+                                </div>
                                 </div>   
                             </div>
                             <div class='modal-footer'>
