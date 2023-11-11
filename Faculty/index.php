@@ -176,7 +176,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                                                 Project Type: $u_project_type<br><br>
                                                 Enter Marks: 
                                                 <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' required>
-                                                <input type='submit' name='submit' id='submitButton' class='btn btn-info btn-large' value='Submit' onsubmit='disableSubmitButton()'>
+                                                <input type='submit' name='submit' id='submitButton' class='btn btn-info btn-large' value='Submit' onsubmit='disableSubmitButton()' onclick=disable(this)>
                                             </form>
                                         </div>
                                         <div class='col-sm-3'>
@@ -292,11 +292,9 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 </script>
 
  <script>
-        function disableSubmitButton() {
-          $(document).on('submit', '#reviewForm', function() {
-              $('#submitButton$id').prop('disabled', true);
-          });
-      }
+        function disable(x){
+          x.disabled = true;
+        }
 </script>
 
 
