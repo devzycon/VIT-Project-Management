@@ -143,6 +143,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $u_review_0 = $row['review_0'];
+        $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
         		
 
         		echo "
@@ -169,16 +170,16 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                             <div class='modal-body'>
                                 <div class='container' id='profile'> 
                                     <div class='row'>
-                                        <div class='col-sm-4 col-md-2'>
-                                            <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
-                                                <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
-                                                <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
-                                                Project Type: $u_project_type<br><br>
-                                                Enter Marks: 
-                                                <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' required>
-                                                <input type='submit' name='submit' id='submitButton' class='btn btn-info btn-large' value='Submit' onsubmit='disableSubmitButton()' onclick=disable(this)>
-                                            </form>
-                                        </div>
+                                    <div class='col-sm-4 col-md-2'>
+                                    <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
+                                        <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
+                                        <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
+                                        Project Type: $u_project_type<br><br>
+                                        Enter Marks: 
+                                        <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' id='checkm' required>
+                                        <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled>
+                                    </form>
+                                </div>
                                         <div class='col-sm-3'>
                                             <h3 class='text-primary'>$u_f_name $u_l_name</h3>
                                             <p class='text-secondary'>
@@ -280,7 +281,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         	}
            
         	    ?> 
-    
+  
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
@@ -291,11 +292,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
     }
 </script>
 
- <script>
-        function disable(x){
-          x.disabled = true;
-        }
-</script>
+
 
 
 			
