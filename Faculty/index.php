@@ -76,6 +76,12 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
     <style>
+      body
+        {
+        
+        background-repeat: no-repeat;
+        background-size: 75%;
+        }
       .small-textbox {
           width: 50px; 
           margin-left: 200px;
@@ -83,12 +89,37 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
       .marks-align {
           
       }
+      .custom-container{
+        margin-top: 60px;
+      }
+      #heade{
+        background-color: #2865b0;
+        height: 50px !important;
+        padding: 0;
+      }
+      #vit{
+        color: white;
+        font-size: 30px;
+        padding: 0;
+        margin: 0;
+      }
+      .student-details{
+        margin-top: 3%;
+        margin-left: 40%;
+        margin-bottom: 4%;
+      }
     </style>
 
 </head>
 <body>
-
-	<div class="container">
+<div id="heade">
+   
+   <center>
+     <h1 id="vit"><b>Btech Capstone Project</b></h1>
+     </center>
+     
+<div>
+	<div class="container custom-container">
 <!-- <a href="https://lexacademy.in" target="_blank"><img src="https://codingcush.com/uploads/logo/logo_61b79976c34f5.png" alt="" width="350px" ></a><br><hr> -->
 
 <!-- adding alert notification  -->
@@ -105,9 +136,11 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 
 
+      <div class="flex-column justify-content-center student-details">
+          <strong class="h2 align-self-center primaryTextColor1 fw-bold text-center"><b>Student Details</b></strong>
+      </div>
 
-
-	<a href="logout.php" class="btn btn-success"><i class="fa fa-lock"></i> Logout</a>
+	<a href="logout.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Logout</a>
 	<button class="btn btn-success" type="button" data-toggle="modal" id="submitBtn" data-target="#myModal">
   <i class="fa fa-plus"></i> Add New Student
   </button>
@@ -138,7 +171,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
         	$get_data = "SELECT * FROM student_data order by 1 desc";
         	$run_data = mysqli_query($con,$get_data);
-			$i = 0;
+			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
                 $sl = ++$i;
