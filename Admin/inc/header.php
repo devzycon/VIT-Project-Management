@@ -54,7 +54,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav ml-auto">
-
+          <a class="nav-link" href="student.php"><i class="fas fa-users mr-2"></i>Students List </span></a>
 
 
           <?php if (Session::get('id') == TRUE) { ?>
@@ -62,6 +62,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
               <li class="nav-item">
 
                   <a class="nav-link" href="index.php"><i class="fas fa-users mr-2"></i>Admin lists </span></a>
+
+                  
               </li>
               <li class="nav-item
 
