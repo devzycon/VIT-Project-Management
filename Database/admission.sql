@@ -102,8 +102,17 @@ ALTER TABLE `users`
 -- CREATE A NEW COLUMN REVIEW 0
 
 ALTER TABLE `student_data`
-  ADD `review_0` varchar(10) NOT NULL;
-COMMIT;
+  ADD `review_0` varchar(10) NOT NULL DEFAULT 0;
+
+
+ALTER TABLE`users`
+  ADD `faculty_id` int(10) NOT NULL;
+
+
+ALTER TABLE `student_data`
+ADD `faculty_id` INT(10) NOT NULL;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
