@@ -9,47 +9,55 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
+
 // database connection
-include('config.php');
+require_once "config.php";
+$username = $_SESSION['username'];
 
-$added = false;
+$sql = "SELECT faculty_id FROM users WHERE username = ?";
+if ($stmt = mysqli_prepare($con, $sql)) {
+    mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
 
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_bind_result($stmt, $faculty_id);
 
-//Add  new student code 
+        if (mysqli_stmt_fetch($stmt)) {
+            echo "Fetched faculty_id: " . $faculty_id;//line for debugging
 
-if(isset($_POST['submit'])){
-	$u_card = $_POST['card_no'];
-	$u_f_name = $_POST['user_first_name'];
-	$u_l_name = $_POST['user_last_name'];
-	$u_email = $_POST['user_email'];
-	$u_phone = $_POST['user_phone'];
-	$u_project_type = $_POST['project'];
-    $u_review_0 = $_POST['review_0']; //added three new variables
-    $u_review_1 = $_POST['review_1'];
-    $u_review_2 = $_POST['review_2'];
-	//$u_staff_id = $_POST['staff_id'];
+            // Store faculty_id in the session
+            $_SESSION['faculty_id'] = $faculty_id;
 
-	$msg = "";
+            mysqli_stmt_close($stmt);
 
-        //changed query to add review0,1 and 2
-	  $insert_data = "INSERT INTO student_data(u_card, u_f_name, u_l_name,u_email, u_phone, u_project_type, u_review_0, u_review_1, u_review_2) VALUES ('$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type',  '$u_review_0', '$u_review_1', '$u_review_2')";
-  	$run_data = mysqli_query($con,$insert_data);
-    if ($run_data) {
-        $added = true;
+            $added = false;
+
+            if (isset($_POST['submit'])) {
+                // Your existing code here
+
+                $u_card = $_POST['card_no'];
+                $u_f_name = $_POST['user_first_name'];
+                $u_l_name = $_POST['user_last_name'];
+                $u_email = $_POST['user_email'];
+                $u_phone = $_POST['user_phone'];
+                $u_project_type = $_POST['project'];
+                $u_review_0 = $_POST['review_0'];
+                $u_review_1 = $_POST['review_1'];
+                $u_review_2 = $_POST['review_2'];
+
+                // Your existing code here
+            }
+
+            $_SESSION['form_token'] = bin2hex(random_bytes(32));
+        } else {
+            echo "Failed to fetch faculty_id.";
+        }
     } else {
-        echo "Error: " . $insert_data . "<br>" . mysqli_error($con);
+        echo "Error executing the statement: " . mysqli_error($con);
     }
-
-  	if($run_data){
-		  $added = true;
-  	}else{
-
-  		echo "Data not insert";
-  	}
-
+} else {
+    echo "Error preparing statement: " . mysqli_error($con);
 }
-$_SESSION['form_token'] = bin2hex(random_bytes(32));
-?>
+              ?>
 
 
 
@@ -169,7 +177,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 			<?php
 
-        	$get_data = "SELECT * FROM student_data order by 1 desc";
+        	$get_data = "SELECT * FROM student_data WHERE `faculty_id`=$faculty_id order by 1 desc";
         	$run_data = mysqli_query($con,$get_data);
 			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
