@@ -61,13 +61,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
-    //faculty id
     if (empty(trim($_POST["faculty_id"]))) {
         $faculty_id_err = "Please enter a Faculty ID.";
     } else {
         $faculty_id = trim($_POST["faculty_id"]);
+    
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE faculty_id = ?";
+        
+        if ($stmt = mysqli_prepare($con, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_faculty_id);
+            
+            // Set parameters
+            $param_faculty_id = $faculty_id;
+            
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $faculty_id_err = "This Faculty ID is already taken.";
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+         
+        // Close statement
+        mysqli_stmt_close($stmt);
     }
-
+    
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($faculty_id_err)) {
         
@@ -168,10 +193,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>   
             <div>
-                 <label>Faculty ID</label>
+                <label>Faculty ID</label>
                 <input type="text" name="faculty_id" class="form-control" value="<?php echo $faculty_id; ?>" >
+                <span class="help-block"><?php echo $faculty_id_err; ?></span>
                 <br>
-            </div> 
+            </div>
+
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
