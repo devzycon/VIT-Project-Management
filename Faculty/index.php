@@ -11,7 +11,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
 // database connection
-require_once "config.php";
+include ("config.php");
 $username = $_SESSION['username'];
 
 $sql = "SELECT faculty_id FROM users WHERE username = ?";

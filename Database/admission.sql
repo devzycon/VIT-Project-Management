@@ -109,6 +109,8 @@ ALTER TABLE`users`
   ADD `faculty_id` int(10) NOT NULL;
 
 
+ALTER TABLE `student_data`
+ADD `faculty_id` INT(10) NOT NULL;
 
 
 
