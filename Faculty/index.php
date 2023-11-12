@@ -9,47 +9,55 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
+
 // database connection
-include('config.php');
+include ("config.php");
+$username = $_SESSION['username'];
 
-$added = false;
+$sql = "SELECT faculty_id FROM users WHERE username = ?";
+if ($stmt = mysqli_prepare($con, $sql)) {
+    mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
 
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_bind_result($stmt, $faculty_id);
 
-//Add  new student code 
+        if (mysqli_stmt_fetch($stmt)) {
+            echo "Fetched faculty_id: " . $faculty_id;//line for debugging
 
-if(isset($_POST['submit'])){
-	$u_card = $_POST['card_no'];
-	$u_f_name = $_POST['user_first_name'];
-	$u_l_name = $_POST['user_last_name'];
-	$u_email = $_POST['user_email'];
-	$u_phone = $_POST['user_phone'];
-	$u_project_type = $_POST['project'];
-    $u_review_0 = $_POST['review_0']; //added three new variables
-    $u_review_1 = $_POST['review_1'];
-    $u_review_2 = $_POST['review_2'];
-	//$u_staff_id = $_POST['staff_id'];
+            // Store faculty_id in the session
+            $_SESSION['faculty_id'] = $faculty_id;
 
-	$msg = "";
+            mysqli_stmt_close($stmt);
 
-        //changed query to add review0,1 and 2
-	  $insert_data = "INSERT INTO student_data(u_card, u_f_name, u_l_name,u_email, u_phone, u_project_type, u_review_0, u_review_1, u_review_2) VALUES ('$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type',  '$u_review_0', '$u_review_1', '$u_review_2')";
-  	$run_data = mysqli_query($con,$insert_data);
-    if ($run_data) {
-        $added = true;
+            $added = false;
+
+            if (isset($_POST['submit'])) {
+                // Your existing code here
+
+                $u_card = $_POST['card_no'];
+                $u_f_name = $_POST['user_first_name'];
+                $u_l_name = $_POST['user_last_name'];
+                $u_email = $_POST['user_email'];
+                $u_phone = $_POST['user_phone'];
+                $u_project_type = $_POST['project'];
+                $u_review_0 = $_POST['review_0'];
+                $u_review_1 = $_POST['review_1'];
+                $u_review_2 = $_POST['review_2'];
+
+                // Your existing code here
+            }
+
+            $_SESSION['form_token'] = bin2hex(random_bytes(32));
+        } else {
+            echo "Failed to fetch faculty_id.";
+        }
     } else {
-        echo "Error: " . $insert_data . "<br>" . mysqli_error($con);
+        echo "Error executing the statement: " . mysqli_error($con);
     }
-
-  	if($run_data){
-		  $added = true;
-  	}else{
-
-  		echo "Data not insert";
-  	}
-
+} else {
+    echo "Error preparing statement: " . mysqli_error($con);
 }
-$_SESSION['form_token'] = bin2hex(random_bytes(32));
-?>
+              ?>
 
 
 
@@ -75,10 +83,51 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
+    <style>
+      body
+        {
+        
+        background-repeat: no-repeat;
+        background-size: 75%;
+        }
+      .small-textbox {
+          width: 50px; 
+          margin-left: 200px;
+      }
+      .marks-align {
+          
+      }
+      .custom-container{
+        margin-top: 60px;
+      }
+      #heade{
+        background-color: #2865b0;
+        height: 50px !important;
+        padding: 0;
+      }
+      #vit{
+        color: white;
+        font-size: 30px;
+        padding: 0;
+        margin: 0;
+      }
+      .student-details{
+        margin-top: 3%;
+        margin-left: 40%;
+        margin-bottom: 4%;
+      }
+    </style>
+
 </head>
 <body>
-
-	<div class="container">
+<div id="heade">
+   
+   <center>
+     <h1 id="vit"><b>Btech Capstone Project</b></h1>
+     </center>
+     
+<div>
+	<div class="container custom-container">
 <!-- <a href="https://lexacademy.in" target="_blank"><img src="https://codingcush.com/uploads/logo/logo_61b79976c34f5.png" alt="" width="350px" ></a><br><hr> -->
 
 <!-- adding alert notification  -->
@@ -95,9 +144,11 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 
 
+      <div class="flex-column justify-content-center student-details">
+          <strong class="h2 align-self-center primaryTextColor1 fw-bold text-center"><b>Student Details</b></strong>
+      </div>
 
-
-	<a href="logout.php" class="btn btn-success"><i class="fa fa-lock"></i> Logout</a>
+	<a href="logout.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Logout</a>
 	<button class="btn btn-success" type="button" data-toggle="modal" id="submitBtn" data-target="#myModal">
   <i class="fa fa-plus"></i> Add New Student
   </button>
@@ -126,23 +177,25 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
 
 			<?php
 
-        	$get_data = "SELECT * FROM student_data order by 1 desc";
+        	$get_data = "SELECT * FROM student_data WHERE `faculty_id`=$faculty_id order by 1 desc";
         	$run_data = mysqli_query($con,$get_data);
-			$i = 0;
+			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
-				$sl = ++$i;
-				$id = $row['id'];
-				$u_card = $row['u_card'];
-				$u_f_name = $row['u_f_name'];
-				$u_l_name = $row['u_l_name'];
-				$u_phone = $row['u_phone'];
+                $sl = ++$i;
+                $id = $row['id'];
+                $u_card = $row['u_card'];
+                $u_f_name = $row['u_f_name'];
+                $u_l_name = $row['u_l_name'];
+				        $u_phone = $row['u_phone'];
                 $u_email = $row['u_email'];
-				$u_project_type = $row['u_project_type'];
+				        $u_project_type = $row['u_project_type'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $u_review_0 = $row['review_0'];
+                $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
+                $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
         		
 
         		echo "
@@ -161,7 +214,7 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                     <div class='modal-dialog'>
                         <div class='modal-content'>
                             <div class='modal-header'>
-                                <h5 class='modal-title' id='exampleModalLabel'>Profile <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                                <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
@@ -169,25 +222,34 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
                             <div class='modal-body'>
                                 <div class='container' id='profile'> 
                                     <div class='row'>
-                                        <div class='col-sm-4 col-md-2'>
-                                            <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
-                                                <i class='fa fa-id-card' aria-hidden='true'></i> $u_card<br>
-                                                <i class='fa fa-phone' aria-hidden='true'></i> $u_phone  <br>
-                                                Project Type: $u_project_type<br><br>
-                                                Enter Marks: 
-                                                <input type='number' class='form-control' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' min='1' max='5' required>
-                                                <input type='submit' name='submit' id='submitButton' class='btn btn-info btn-large' value='Submit' onsubmit='disableSubmitButton()'>
-                                            </form>
-                                        </div>
-                                        <div class='col-sm-3'>
-                                            <h3 class='text-primary'>$u_f_name $u_l_name</h3>
-                                            <p class='text-secondary'>
-                                                <i class='fa fa-envelope-o' aria-hidden='true'></i> $u_email
-                                                <br />
-                                            </p>
-                                            <!-- Split button -->
-                                        </div>
+                                    <div class='col-md-5 offset-md-2'>
+                                    <table class='table table-bordered table-striped table-hover custom-table'>
+                                    <thead>
+                                        <tr>
+                                            <th class='text-center' scope='col'>Student Name</th>
+                                            <th class='text-center' scope='col'>Register Number</th>
+                                            <th class='text-center' scope='col'>Phone Number</th>
+                                            <th class='text-center' scope='col'>Email ID</th>
+                                            <th class='text-center' scope='col'>Project Type</th>
+                                        </tr>
+                                    </thead>
+                                      <tr>
+                                        <td class='text-left'>$u_f_name   $u_l_name</td>
+                                        <td class='text-left'>$u_card</td>
+                                        <td class='text-left'>$u_phone</td>
+                                                <td class='text-center'>$u_email</td>
+                                        <td class='text-center'>$u_project_type</td>
+                                      </tr>
+                                    </table>
+                                    <div class='marks-align'>
+                                      <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
+                                        Enter Marks:<br>
+                                        <label for='u_review_0'><b>Problem Statement / Objective / Solution (5 marks)</b></label>
+                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' width=5px min='1' max='5' id='checkm' required $textboxDisabled><br>
+                                        <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled><br><br> 
+                                      </form>
                                     </div>
+                                </div>
                                 </div>   
                             </div>
                             <div class='modal-footer'>
@@ -280,24 +342,17 @@ $_SESSION['form_token'] = bin2hex(random_bytes(32));
         	}
            
         	    ?> 
-    
+  
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
         // If slValue is greater than 5, disable the button
         document.getElementById("submitBtn").disabled = true;
         // Optionally, you can display an alert message
-        alert("You have reached the maximum limit of form submissions (5 times).");
     }
 </script>
 
- <script>
-        function disableSubmitButton() {
-          $(document).on('submit', '#reviewForm', function() {
-              $('#submitButton$id').prop('disabled', true);
-          });
-      }
-</script>
+
 
 
 			

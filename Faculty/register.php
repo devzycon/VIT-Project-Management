@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $faculty_id= "";
+$username_err = $password_err = $confirm_password_err = $faculty_id_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -61,30 +61,63 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
-    // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if (empty(trim($_POST["faculty_id"]))) {
+        $faculty_id_err = "Please enter a Faculty ID.";
+    } else {
+        $faculty_id = trim($_POST["faculty_id"]);
+    
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE faculty_id = ?";
         
-        // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-         
-        if($stmt = mysqli_prepare($con, $sql)){
+        if ($stmt = mysqli_prepare($con, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "s", $param_faculty_id);
             
             // Set parameters
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_faculty_id = $faculty_id;
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
-                header("location: login.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
+            if (mysqli_stmt_execute($stmt)) {
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $faculty_id_err = "This Faculty ID is already taken.";
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
             }
         }
          
         // Close statement
+        mysqli_stmt_close($stmt);
+    }
+    
+    // Check input errors before inserting in database
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($faculty_id_err)) {
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password, faculty_id) VALUES (?, ?, ?)";
+       
+        if ($stmt = mysqli_prepare($con, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_faculty_id);
+        
+            // Set parameters
+            $param_faculty_id = $faculty_id;
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                // Redirect to the login page
+                header("location: login.php");
+            } else {
+                echo "Something went wrong. Please try again later.";
+            }
+        }
+         
+        // Close the statement
         mysqli_stmt_close($stmt);
     }
     
@@ -160,10 +193,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>   
             <div>
-                 <label>Faculty ID</label>
-                <input type="text" name="userid" class="form-control" >
+                <label>Faculty ID</label>
+                <input type="text" name="faculty_id" class="form-control" value="<?php echo $faculty_id; ?>" >
+                <span class="help-block"><?php echo $faculty_id_err; ?></span>
                 <br>
-            </div> 
+            </div>
+
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
