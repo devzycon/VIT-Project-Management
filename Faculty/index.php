@@ -349,7 +349,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         // If slValue is greater than 5, disable the button
         document.getElementById("submitBtn").disabled = true;
         // Optionally, you can display an alert message
-        alert("You have reached the maximum limit of form submissions (5 times).");
     }
 </script>
 
