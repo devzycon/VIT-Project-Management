@@ -211,7 +211,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 					    <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#view$id'>View</button>
 					</span>
                     <div class='modal fade' id='view$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
+                    <div class='modal-dialog modal-lg'>
                         <div class='modal-content'>
                             <div class='modal-header'>
                                 <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
