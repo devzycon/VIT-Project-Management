@@ -22,7 +22,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         mysqli_stmt_bind_result($stmt, $faculty_id);
 
         if (mysqli_stmt_fetch($stmt)) {
-            echo "Fetched faculty_id: " . $faculty_id;//line for debugging
+            // echo "Fetched faculty_id: " . $faculty_id;//line for debugging
 
             // Store faculty_id in the session
             $_SESSION['faculty_id'] = $faculty_id;
@@ -245,7 +245,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                                       <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
                                         Enter Marks:<br>
                                         <label for='u_review_0'><b>Problem Statement / Objective / Solution (5 marks)</b></label>
-                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' placeholder='Enter Marks.' value='$u_review_0' width=5px min='1' max='5' id='checkm' required $textboxDisabled><br>
+                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' value='$u_review_0' width=5px min='1' max='5' id='checkm' required $textboxDisabled><br>
                                         <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled><br><br> 
                                       </form>
                                     </div>
