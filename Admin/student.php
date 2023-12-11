@@ -196,6 +196,9 @@ require_once 'lib/Database.php';
         <?php }?>
             
         </table>
+        <form action="studentcsv.php" method="post">
+            <button type="submit" name="download" class="btn btn-secondary">Download CSV</button>
+        </form>
     </div>
 </body>
 </html>

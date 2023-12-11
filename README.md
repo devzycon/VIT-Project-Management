@@ -18,6 +18,8 @@ Faculty members can add students to their project groups. The details collected 
 ### Student Constraints: 
 The system enforces a constraint that each faculty member can only add up to 5 students to their group. In the future, we plan to enhance this by associating students with faculty members through faculty IDs stored in the database.
 
+Faculties are allowed to take up a maximum of 2 PAT of the 5 total projects
+
 ### Editing Student Data: 
 Faculty members are not allowed to directly edit the details of the students once they are added. If any changes are needed, the faculty member can send a request to the admin.
 
