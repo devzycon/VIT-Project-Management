@@ -24,10 +24,11 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['form_token']) {
     $u_email = $_POST['user_email'];
     $u_phone = $_POST['user_phone'];
     $u_project_type = $_POST['project_type'];
+    $project_name = $_POST['projectName'];  
    
 
     // Insert data into the database
-    $insert_data = "INSERT INTO student_data(faculty_id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type, review_0) VALUES ('$faculty_id','$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$review_0')";
+    $insert_data = "INSERT INTO student_data(faculty_id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type, review_0,project_name) VALUES ('$faculty_id','$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$review_0','$project_name')";
     $run_data = mysqli_query($con, $insert_data);
 
     if ($run_data) {

@@ -22,12 +22,33 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         mysqli_stmt_bind_result($stmt, $faculty_id);
 
         if (mysqli_stmt_fetch($stmt)) {
-            // echo "Fetched faculty_id: " . $faculty_id;//line for debugging
-
             // Store faculty_id in the session
             $_SESSION['faculty_id'] = $faculty_id;
 
             mysqli_stmt_close($stmt);
+
+            // Get 'PAT' count
+            $sql = "SELECT COUNT(*) AS patCount FROM student_data WHERE u_project_type = 'PAT' AND faculty_id = ?";
+            
+            if ($stmt = mysqli_prepare($con, $sql)) {
+                mysqli_stmt_bind_param($stmt, "i", $faculty_id); // Assuming faculty_id is an integer
+
+                if (mysqli_stmt_execute($stmt)) {
+                    mysqli_stmt_bind_result($stmt, $patCount);
+
+                    if (mysqli_stmt_fetch($stmt)) {
+                        $_SESSION['patCount'] = $patCount;
+                    } else {
+                        echo "Failed to fetch 'PAT' count.";
+                    }
+
+                    mysqli_stmt_close($stmt);
+                } else {
+                    echo "Error executing the statement: " . mysqli_error($con);
+                }
+            } else {
+                echo "Error preparing statement: " . mysqli_error($con);
+            }
 
             $added = false;
 
@@ -39,11 +60,22 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_l_name = $_POST['user_last_name'];
                 $u_email = $_POST['user_email'];
                 $u_phone = $_POST['user_phone'];
-                $u_project_type = $_POST['project'];
+                $u_project_type = isset($u_project_type) ? $u_project_type : ""; 
                 $u_review_0 = $_POST['review_0'];
                 $u_review_1 = $_POST['review_1'];
                 $u_review_2 = $_POST['review_2'];
+                $project_name = $_POST['projectName'];
+                
 
+                if ($u_project_type == 'PAT') {
+                  // Initialize the count if it doesn't exist
+                  if (!isset($_SESSION['patCount'])) {
+                      $_SESSION['patCount'] = 0;
+                  }
+
+                  // Increment the count
+                  $_SESSION['patCount']++;
+              } 
                 // Your existing code here
             }
 
@@ -83,6 +115,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
+    <script src="auto_logout.js"></script>
+
     <style>
       body
         {
@@ -171,6 +205,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         <th class="text-center" scope="col">Review 1</th>
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
+        <th class="text-center" scope="col">Project Name</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
 </thead>
@@ -190,10 +225,11 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 				        $u_phone = $row['u_phone'];
                 $u_email = $row['u_email'];
 				        $u_project_type = $row['u_project_type'];
+                $u_review_0 = $row['review_0'];
+                $project_name = $row['project_name'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
-                $u_review_0 = $row['review_0'];
                 $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
                 $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
         		
@@ -204,7 +240,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 				<td class='text-left'>$u_f_name   $u_l_name</td>
 				<td class='text-left'>$u_card</td>
 				<td class='text-left'>$u_phone</td>
-                <td class='text-center'>$u_email</td>
+        <td class='text-center'>$u_email</td>
 				<td class='text-center'>$u_project_type</td>
                 <td class='text-center'>
 					<span>
@@ -231,6 +267,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                                             <th class='text-center' scope='col'>Phone Number</th>
                                             <th class='text-center' scope='col'>Email ID</th>
                                             <th class='text-center' scope='col'>Project Type</th>
+                                            <th class='text-center' scope='col'>Project Name</th>
                                         </tr>
                                     </thead>
                                       <tr>
@@ -239,13 +276,14 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                                         <td class='text-left'>$u_phone</td>
                                                 <td class='text-center'>$u_email</td>
                                         <td class='text-center'>$u_project_type</td>
+                                        <td class='text-center'>$project_name</td>
                                       </tr>
                                     </table>
                                     <div class='marks-align'>
                                       <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
                                         Enter Marks:<br>
                                         <label for='u_review_0'><b>Problem Statement / Objective / Solution (5 marks)</b></label>
-                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' value='$u_review_0' width=5px min='1' max='5' id='checkm' required $textboxDisabled><br>
+                                        <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' value='$u_review_0' width=5px min='0' max='5' id='checkm' required $textboxDisabled><br>
                                         <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled><br><br> 
                                       </form>
                                     </div>
@@ -315,6 +353,12 @@ if ($stmt = mysqli_prepare($con, $sql)) {
               <option value='In House' <?php echo ($u_project_type == 'In House') ? 'selected' : ''; ?>>In House</option>
               <option value='PAT' <?php echo ($u_project_type == 'PAT') ? 'selected' : ''; ?>>PAT</option>
               </select>
+              <div class='form-row'>
+              <div class='form-group col-md-12'>
+                  <label for='project_name'>Project Name</label>
+                  <input type='text' class='form-control' name='project_name' placeholder='Enter Project Name' value='$project_name'>
+              </div>
+          </div>
           </div>
           </div>
           </div>
@@ -335,6 +379,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
     </div>
   </div>
 				</td> 
+        <td class='text-center'>$project_name</td>
 			</tr>
         		";
             
@@ -342,7 +387,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         	}
            
         	    ?> 
-  
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
@@ -351,6 +395,210 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         // Optionally, you can display an alert message
     }
 </script>
+
+
+
+<table class="table table-bordered table-striped table-hover" id="myTable">
+<thead>
+    <tr>
+        <th class="text-center" scope="col" id="serial">S.L</th>
+        <th class="text-center" scope="col">Student Name</th>
+        <th class="text-center" scope="col">Register Number</th>
+        <th class="text-center" scope="col">Phone Number</th>
+        <!-- Remove the following line for the Staff ID column -->
+        <!-- <th class="text-center" scope="col">Staff Id</th> -->
+        <th class="text-center" scope="col">Email ID</th>
+		<th class="text-center" scope="col">Project Type</th>
+        <!-- <th class="text-center" scope="col">View</th> -->
+        <!-- Added 3 new columns review 0 , 1 and 2 -->
+        <th class="text-center" scope="col">Review 0</th>
+        <th class="text-center" scope="col">Review 1</th>
+        <th class="text-center" scope="col">Review 2</th>
+        <th class="text-center" scope="col">Edit</th>
+        <th class="text-center" scope="col">Project Name</th>
+        <!-- <th class="text-center" scope="col">Delete</th> -->
+    </tr>
+</thead>
+
+			<?php
+
+        	$get_data = "SELECT * FROM student_data WHERE `faculty_id`=$faculty_id  and `u_project_type`='pat'order by 1 desc";
+        	$run_data = mysqli_query($con,$get_data);
+			    $i = 0;
+        	while($row = mysqli_fetch_array($run_data))
+        	{
+                $sl = ++$i;
+                $id = $row['id'];
+                $u_card = $row['u_card'];
+                $u_f_name = $row['u_f_name'];
+                $u_l_name = $row['u_l_name'];
+				        $u_phone = $row['u_phone'];
+                $u_email = $row['u_email'];
+				        $u_project_type = $row['u_project_type'];
+                $project_name = $row['project_name'];
+                // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
+                // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
+                // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
+                $u_review_0 = $row['review_0'];
+                $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
+                $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
+        		
+
+        		echo "
+            <tr>
+            <td class='text-center' id='serial'>$sl</td>
+            <td class='text-left'>$u_f_name   $u_l_name</td>
+            <td class='text-left'>$u_card</td>
+            <td class='text-left'>$u_phone</td>
+            <td class='text-center'>$u_email</td>
+            <td class='text-center'>$u_project_type</td>
+                    <td class='text-center'>
+              <span>
+                  <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#view$id'>View</button>
+              </span>
+                        <div class='modal fade' id='view$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
+                        <div class='modal-dialog modal-lg'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                        <span aria-hidden='true'>&times;</span>
+                                    </button>
+                                </div>
+                                <div class='modal-body'>
+                                    <div class='container' id='profile'> 
+                                        <div class='row'>
+                                        <div class='col-md-5 offset-md-2'>
+                                        <table class='table table-bordered table-striped table-hover custom-table'>
+                                        <thead>
+                                            <tr>
+                                                <th class='text-center' scope='col'>Student Name</th>
+                                                <th class='text-center' scope='col'>Register Number</th>
+                                                <th class='text-center' scope='col'>Phone Number</th>
+                                                <th class='text-center' scope='col'>Email ID</th>
+                                                <th class='text-center' scope='col'>Project Type</th>
+                                                <th class='text-center' scope='col'>Project Name</th>
+                                            </tr>
+                                        </thead>
+                                          <tr>
+                                            <td class='text-left'>$u_f_name   $u_l_name</td>
+                                            <td class='text-left'>$u_card</td>
+                                            <td class='text-left'>$u_phone</td>
+                                                    <td class='text-center'>$u_email</td>
+                                            <td class='text-center'>$u_project_type</td>
+                                            <td class='text-center'>$project_name</td>
+                                          </tr>
+                                        </table>
+                                        <div class='marks-align'>
+                                          <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
+                                            Enter Marks:<br>
+                                            <label for='u_review_0'><b>Problem Statement / Objective / Solution (5 marks)</b></label>
+                                            <input type='number' class='form-control small-textbox' id='u_review_0' name='u_review_0' value='$u_review_0' width=5px min='0' max='5' id='checkm' required $textboxDisabled><br>
+                                            <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit' $buttonDisabled><br><br> 
+                                          </form>
+                                        </div>
+                                    </div>
+                                    </div>   
+                                </div>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+            </td>
+                    <td class='text-center'>-NA-</td>
+                    <td class='text-center'>-NA-</td>
+            <td class='text-center'>
+              <span>
+              <a href='#' class='btn btn-warning mr-3 edituser' data-toggle='modal' data-target='#edit$id' title='Edit'><i class='fa fa-pencil-square-o fa-lg'></i></a>
+              </span>
+                        <div id='edit$id' class='modal fade' role='dialog'>
+        <div class='modal-dialog'>
+      
+          <!-- Modal content-->
+          <div class='modal-content'>
+            <div class='modal-header'>
+                   <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                   <h4 class='modal-title text-center'>Edit your Data</h4> 
+            </div>
+      
+            <div class='modal-body'>
+              <form action='edit.php?id=$id' method='post' enctype='multipart/form-data'>
+      
+              <div class='form-row'>
+              <div class='form-group col-md-6'>
+              <label for='inputEmail4'>Student Id.</label>
+              <input type='text' class='form-control' name='card_no' placeholder='Enter 12-digit Student Id.' maxlength='12' value='$u_card' required>
+              </div>
+              <div class='form-group col-md-6'>
+              <label for='inputPassword4'>Mobile No.</label>
+              <input type='phone' class='form-control' name='user_phone' placeholder='Enter 10-digit Mobile no.' maxlength='10' value='$u_phone' required>
+              </div>
+              </div>
+              
+              
+              <div class='form-row'>
+              <div class='form-group col-md-6'>
+              <label for='firstname'>First Name</label>
+              <input type='text' class='form-control' name='user_first_name' placeholder='Enter First Name' value='$u_f_name'>
+              </div>
+              <div class='form-group col-md-6'>
+              <label for='lastname'>Last Name</label>
+              <input type='text' class='form-control' name='user_last_name' placeholder='Enter Last Name' value='$u_l_name'>
+              </div>
+              </div>
+              
+          
+              
+              
+              <div class='form-row'>
+              <div class='form-group col-md-6'>
+              <label for='email'>Email Id</label>
+              <input type='email' class='form-control' name='user_email' placeholder='Enter Email id' value='$u_email'>
+              </div>
+              <div class='form-group col-md-6'>
+              <label for='project_type'>Project Type:</label>
+              <select id='project_type' name='project_type' class='form-control'>
+                  <option value='In House' <?php echo ($u_project_type == 'In House') ? 'selected' : ''; ?>>In House</option>
+                  <option value='PAT' <?php echo ($u_project_type == 'PAT') ? 'selected' : ''; ?>>PAT</option>
+                  </select>
+                  <div class='form-row'>
+                  <div class='form-group col-md-12'>
+                      <label for='project_name'>Project Name</label>
+                      <input type='text' class='form-control' name='project_name' placeholder='Enter Project Name' value='$project_name'>
+                  </div>
+              </div>
+              </div>
+              </div>
+              </div>
+           
+          
+                  
+                   <div class='modal-footer'>
+                   <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
+                   <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+               </div>
+      
+      
+              </form>
+            </div>
+      
+          </div>
+      
+        </div>
+      </div>
+            </td> 
+            <td class='text-center'>$project_name</td>
+          </tr>
+        		";
+            
+
+        	}
+           
+        	    ?> 
+
+  
 
 
 
@@ -393,7 +641,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 </div>
 <div class="form-group col-md-6">
 <label for="inputPassword4">Mobile No.</label>
-<input type="text" class="form-control" name="user_phone" placeholder="Enter 10-digit Mobile no." maxlength="10" required >
+<input type="tel" class="form-control" name="user_phone" placeholder="Enter 10-digit Mobile no." maxlength="10" pattern="\d{10}" title="Please enter a 10-digit mobile number" required>
 </div>
 </div>
 
@@ -416,12 +664,28 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 <label for="email">Email Id</label>
 <input type="email" class="form-control" name="user_email" placeholder="Enter Email id">
 </div>
-<div class="form-group col-md-6">
-<label for="project_type">Project Type:</label>
-        <select id="project_type" name="project_type" class="form-control">
-            <option value="In House">In House</option>
-			<option value="PAT">PAT</option>
+<?php
+// Your PHP code to define $u_project_type
+$u_project_type = isset($u_project_type) ? $u_project_type : "Select"; // Set to a default value if not set
+?>
 
+<div class="form-group col-md-6">
+<label for="email">Project Type</label>
+<select id="projectType" name="project_type" class="form-control" onchange="updateDropdown()">
+    <option value="" <?php echo ($u_project_type == '') ? 'selected' : ''; ?> disabled>Select</option>
+    <option value="In House" <?php echo ($u_project_type == 'In House') ? 'selected' : ''; ?>>In House</option>
+    <option value="PAT" <?php echo ($u_project_type == 'PAT') ? 'selected' : ''; ?>>PAT</option>
+</select>
+
+</div>
+
+
+</div>
+<div class="form-row">
+    <div class="form-group col-md-12">
+        <label for="project_name">Project Name</label>
+        <input type="text" class="form-control" name="projectName" placeholder="Enter Project Name">
+    </div>
 </div>
 
             
@@ -437,6 +701,29 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 
   </div>
 </div>
+
+<script>
+   var patCount = <?php echo isset($_SESSION['patCount']) ? $_SESSION['patCount'] : 0; ?>;
+
+function updateDropdown() {
+    var projectTypeSelect = document.getElementById('projectType');
+    var patOption = projectTypeSelect.querySelector('option[value="PAT"]');
+
+    if (patCount >= 2) {
+        patOption.style.display = 'none';
+        projectTypeSelect.value = 'In House';
+    } else {
+        patOption.style.display = '';
+    }
+}
+
+// Call the function when patCount reaches 2
+if (patCount >= 2) {
+    updateDropdown();
+}
+
+</script>
+
 
 
 <!-- my model 2 -->
@@ -498,7 +785,12 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 			<option value="PAT">PAT</option>
 
 </div>
-
+<div class="form-row">
+    <div class="form-group col-md-12">
+        <label for="project_name">Project Name</label>
+        <input type="text" class="form-control" name="projectName" placeholder="Enter Project Name">
+    </div>
+</div>
             
         	
         	
