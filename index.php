@@ -4,8 +4,8 @@
     <script type="text/javascript" src="https://main.js?attr=RQlKJqpTliPcz7Ld_NtzoZrYWQYfepfsRa0iuEYC1Lb9_-SOxMTYOuDuDj7oz5vj0b9gSeRui56hDfaWjk4rRQ" charset="UTF-8"></script>
     <title>VIT Chennai - BTECH CAPSTONE</title>
     <link rel="icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="https://vtopcc.vit.ac.in/vtop/get/bs/css/1">
-    <link rel="stylesheet" type="text/css" href="https://vtopcc.vit.ac.in/vtop/assets/css/PreLogin.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="PreLogin.css" />
 </head>
 
 <body class="WhiteBackground">

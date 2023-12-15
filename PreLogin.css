@@ -1,0 +1,144 @@
+@font-face {
+    font-family: OpenSans;
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+html,
+body {
+    font-family: OpenSans;
+    font-size: 14px;
+}
+
+.hightlight1 {
+    color: rgb(144, 12, 63);
+}
+
+.spotlight-background {
+    background: linear-gradient(90deg, #cec2c2, #d3c8c8, #d7cece, #dcd5d5, #e0dbdb, #e5e1e1, #e9e8e8, #eeeeee);
+}
+
+.WhiteBackground {
+    background-color: rgb(255, 255, 255);
+}
+
+.employeeTextColor {
+    color:rgb(212, 172, 13);
+}
+
+.headerBackgroundColor {
+    background: rgb(36, 85, 163);
+    background: linear-gradient(130deg, rgba(36, 85, 163, 1) 23%, rgba(52, 151, 219, 1) 52%, rgba(52, 142, 219, 1) 58%, rgba(52, 131, 219, 1) 65%, rgba(40, 116, 166, 1) 74%);
+}
+
+
+.VITLogoStyle {
+    font-family: Times;
+}
+
+.primaryTextColor1{
+    color:rgb(23,108,184)
+}
+
+.spotlightHeader {
+    border-width: 3px 0px 0px 0px;
+    border-style: solid;
+    border-color: rgb(108, 36, 5);
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.cardEmployee {
+    border-width: 3px 0px 0px 0px;
+    border-style: solid;
+    border-color: rgb(212, 172, 13);
+}
+
+.cardAlumni {
+    border-width: 3px 0px 0px 0px;
+    border-style: solid;
+    border-color: rgb( 93, 173, 226 );
+}
+
+@media (min-width: 768px) {
+
+
+    .imgSize {
+        width: 55px;
+        height: 55px;
+    }
+
+    .VITEmblem {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+
+
+    .imgSize {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .VITLogoStyle {
+        font-family: Times;
+        font-size: 23px;
+    }
+
+    .VITEmblem {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+
+
+  *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  }
+ 
+ 
+ 
+/* second */
+.circle{
+margin:10px;
+width:100px;
+height:100px;
+background:rgb(40,101,176);
+border-radius:50%;
+position:relative;
+box-shadow:0px 5px 12px rgba(0,0,0.7);
+margin-bottom:3%;
+margin-top:8%;
+margin-left:35%;
+
+}
+.circle img{
+
+position:absolute;
+height:70px;
+width:70px;
+top:-15%;
+left:18%;
+}
+.circle p{
+position:absolute;
+top:60%;
+left:24%;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+.circle:hover p{
+color:#F9FC06;
+}	
+.circle:hover{
+background:rgb(52,141,219);
+}
