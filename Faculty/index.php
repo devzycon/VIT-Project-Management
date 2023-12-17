@@ -65,6 +65,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_1 = $_POST['review_1'];
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
+                $u_attendance = $_POST['attendance'];
+                $u_present = $_POST['no_of_present'];
                 
 
                 if ($u_project_type == 'PAT') {
@@ -206,6 +208,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
         <th class="text-center" scope="col">Project Name</th>
+        <th class="text-center" scope="col">Attendance</th>
+        <th class="text-center" scope="col">Enter Attendance</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
 </thead>
@@ -227,6 +231,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 				        $u_project_type = $row['u_project_type'];
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
+                $u_attendance = $row['attendance'];
+                $u_present = $row['no_of_present'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
@@ -380,6 +386,104 @@ if ($stmt = mysqli_prepare($con, $sql)) {
   </div>
 				</td> 
         <td class='text-center'>$project_name</td>
+        <td class='text-center'>$u_attendance</td>
+        <td class='text-center'>
+          <span>
+            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#viewatt$id'>Enter</button>
+          </span>
+          <div class='modal fade' id='viewatt$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
+          <div class='modal-dialog modal-lg'>
+              <div class='modal-content'>
+                  <div class='modal-header'>
+                      <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                      <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                          <span aria-hidden='true'>&times;</span>
+                      </button>
+                  </div>
+                  <div class='modal-body'>
+                      <div class='container' id='profile'> 
+                          <div class='row'>
+                          <div class='col-md-5 offset-md-2'>
+                          <table class='table table-bordered table-striped table-hover custom-table'>
+                            <tr>
+                              <th>DAY</th>
+                              <th>Attendance</th>
+                            </tr>
+                            <tr>
+                              <td>Monday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Tuesday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Wednesday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Thursday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Friday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Saturday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Sunday</td>
+                              <td>
+                                <select id='no_of_present' name='project_type' class='form-control'>
+                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
+                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </table>
+                      </div>
+                      </div>   
+                  </div>
+                  <div class='modal-footer'>
+                    <input type='submit' name='submit' class='btn btn-info btn-large' value='Calculate'>
+                      <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </td>
 			</tr>
         		";
             
