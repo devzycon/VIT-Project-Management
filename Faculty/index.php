@@ -66,7 +66,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
                 $u_attendance = $_POST['attendance'];
-                $u_present = $_POST['no_of_present'];
                 
 
                 if ($u_project_type == 'PAT') {
@@ -232,7 +231,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
                 $u_attendance = $row['attendance'];
-                $u_present = $row['no_of_present'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
@@ -404,81 +402,84 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                       <div class='container' id='profile'> 
                           <div class='row'>
                           <div class='col-md-5 offset-md-2'>
-                          <table class='table table-bordered table-striped table-hover custom-table'>
-                            <tr>
-                              <th>DAY</th>
-                              <th>Attendance</th>
-                            </tr>
-                            <tr>
-                              <td>Monday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Tuesday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Wednesday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Thursday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Friday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Saturday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Sunday</td>
-                              <td>
-                                <select id='no_of_present' name='project_type' class='form-control'>
-                                  <option value='Present' <?php echo ($u_present = $u_present + 1) ? 'selected' : ''; ?>>Present</option>
-                                  <option value='Absent' <?php echo ($u_present = $u_present + 0) ? 'selected' : ''; ?>>Absent</option>
-                                </select>
-                              </td>
-                            </tr>
-                          </table>
-                      </div>
+                          <h2><b>WEEK 1</b></h2><br>
+                          <form action='attend.php?id=$id' id='attendForm' method='post' enctype='multipart/form-data'>
+                              <table class='table table-bordered table-striped table-hover custom-table'>
+                              <tr>
+                                <th>DAY</th>
+                                <th>Attendance</th>
+                              </tr>
+                              <tr>
+                                <td>Monday</td>
+                                <td>
+                                  <select name='attendance[Monday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Tuesday</td>
+                                <td>
+                                  <select name='attendance[Tuesday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Wednesday</td>
+                                <td>
+                                  <select name='attendance[Wednesday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Thursday</td>
+                                <td>
+                                  <select name='attendance[Thursday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Friday</td>
+                                <td>
+                                  <select name='attendance[Friday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Saturday</td>
+                                <td>
+                                  <select name='attendance[Saturday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Sunday</td>
+                                <td>
+                                  <select name='attendance[Sunday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                            </table>
+                            <div class='modal-footer'>
+                              <input type='submit' name='submit' class='btn btn-info btn-large' value='Calculate'>
+                              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                            </div>
+                          </form>
+                        </div>
                       </div>   
-                  </div>
-                  <div class='modal-footer'>
-                    <input type='submit' name='submit' class='btn btn-info btn-large' value='Calculate'>
-                      <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                   </div>
               </div>
           </div>
