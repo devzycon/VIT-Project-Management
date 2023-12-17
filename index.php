@@ -12,11 +12,9 @@
     <nav class="navbar navbar-expand-lg bg-light headerBackgroundColor py-1 fixed-top shadow" id="vtopOpenPageHeader">
         <div class="container-fluid justify-content-start">
             <a class="navbar-brand" href="javacript:void(0);"> 
-                <!-- ADD HOMEPAGE LINK HERE -->
                 <img src="https://vtopcc.vit.ac.in/vtop/assets/img/VITLogoEmblem.png" class="img-responsive VITEmblem" />
             </a>
             <a class="navbar-brand VITLogoStyle text-light" href="javascript:void(0);"><span class="h1 fw-bold">VIT</span></a>
-            <!-- ADD HOME PAGE LINK HERE -->
                 &nbsp;&nbsp;
                 <span class="navbar-text text-light">&nbsp;Chennai Campus</span>
 
@@ -73,31 +71,10 @@
         </div>
 
         <div class="row mt-1 mb-3"> 
-            <div class="col-md-6"> <!-- First column -->
+            <div class="md-6"> 
                 <div class="card border-0 shadow-lg">
                     <div class="card-header d-flex justify-content-between spotlightHeader">
-                        <span class="fw-bold hightlight1 h6">Spotlight - Faculty</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush text-start small spotlight-background">
-                            <li class="list-group-item py-2 small">
-                                <div class="d-flex w-100 align-items-stretch justify-content-start">
-                                    <div class="w-75 py-0">
-                                        <a class="list-group-item-action" target="_self" href="javascript:void(0);" onclick="javascript:void(0);">
-                                            <strong class="fw-bold text-dark">SOME CONTENT</strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- ADD THE REST OF THE CONTENT IN <LI> TAGS -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6"> <!-- Second column -->
-                <div class="card border-0 shadow-lg">
-                    <div class="card-header d-flex justify-content-between spotlightHeader">
-                        <span class="fw-bold hightlight1 h6">Spotlight - Admin</span>
+                        <span class="fw-bold hightlight1 h6">Spotlight</span>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush text-start small spotlight-background">
