@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
 
     // Get the attendance data for each day
     $attendance = $_POST['attendance'];
+    $u_no_of_present = $_POST['no_of_present'];
 
     // Calculate the total present and absent
     foreach ($attendance as $day => $status) {
@@ -19,6 +20,8 @@ if (isset($_POST['submit'])) {
             $total_absent++;
         }
     }
+
+    $u_no_of_present = $total_present;    
 
     // Calculate attendance percentage
     $total_days = count($attendance);

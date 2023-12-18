@@ -66,6 +66,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
                 $u_attendance = $_POST['attendance'];
+                $u_no_of_present = $_POST['no_of_present'];
                 
 
                 if ($u_project_type == 'PAT') {
