@@ -66,7 +66,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
                 $u_attendance = $_POST['attendance'];
-                $u_no_of_present = $_POST['no_of_present'];
+                $no_of_present = $_POST['no_of_present'];
                 
 
                 if ($u_project_type == 'PAT') {
@@ -232,6 +232,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
                 $u_attendance = $row['attendance'];
+                $no_of_present = $row['no_of_present'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
