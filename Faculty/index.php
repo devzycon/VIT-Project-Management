@@ -114,7 +114,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="jquery.js"></script>
     <script src="auto_logout.js"></script>
 
@@ -384,13 +384,14 @@ if ($stmt = mysqli_prepare($con, $sql)) {
   </div>
 				</td> 
         <td class='text-center'>$project_name</td>
-        <td class='text-center'>$u_attendance</td>
-        <td class='text-center'>
-          <span>
-            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#viewatt$id'>Enter</button>
-          </span>
-          <div class='modal fade' id='viewatt$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
-          <div class='modal-dialog modal-lg'>
+        <td class='text-center' id='attendanceCell$id'>$u_attendance</td>
+
+<td class='text-center'>
+  <span>
+    <button class='btn btn-primary view-button' data-toggle='modal' type='button' data-target='#viewatt$id'>Enter</button>
+  </span>
+  <div class='modal fade' id='viewatt$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
+   <div class='modal-dialog modal-lg'>
               <div class='modal-content'>
                   <div class='modal-header'>
                       <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
@@ -403,8 +404,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                           <div class='row'>
                           <div class='col-md-5 offset-md-2'>
                           <h2><b>WEEK 1</b></h2><br>
-                          <form action='attend.php?id=$id' id='attendForm' method='post' enctype='multipart/form-data'>
-                              <table class='table table-bordered table-striped table-hover custom-table'>
+                          <form id='attendForm$id' action='attend.php?id=$id' method='post' enctype='multipart/form-data'>
+                          <table class='table table-bordered table-striped table-hover custom-table'>
                               <tr>
                                 <th>DAY</th>
                                 <th>Attendance</th>
@@ -474,10 +475,11 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                               </tr>
                             </table>
                             <div class='modal-footer'>
-                              <input type='submit' name='submit' class='btn btn-info btn-large' value='Calculate'>
-                              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                            </div>
-                          </form>
+                            <input type='button' name='submit' class='btn btn-info btn-large' value='Calculate' onclick='submitForm($id)'>
+
+        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+      </div>
+    </form>
                         </div>
                       </div>   
                   </div>
@@ -492,6 +494,46 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         	}
            
         	    ?> 
+
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+
+<script>
+  function submitForm(id) {
+    var form = $('#attendForm' + id);
+
+    $.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      data: form.serialize() + '&submit=1',
+      dataType: 'json',
+      success: function(response) {
+        console.log(response); // Log the entire response object for debugging
+        if (response.success) {
+          alert('Attendance updated successfully');
+          console.log('Updating attendance cell:', '#attendanceCell' + id);
+          $('#attendanceCell' + id).html(response.newAttendance); // Use .html() instead of .text()
+        } else {
+          alert('Error updating attendance: ' + response.message);
+        }
+      },
+      error: function(error) {
+        console.error('AJAX Error:', error);
+        alert('An error occurred while submitting the form.');
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
