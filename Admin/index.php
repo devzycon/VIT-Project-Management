@@ -43,6 +43,7 @@ if (isset($activeId)) {
 
 
  ?>
+ 
       <div class="card ">
         <div class="card-header">
           <h3><i class="fas fa-users mr-2"></i>User list <span class="float-right">Welcome! <strong>
@@ -176,7 +177,32 @@ if (isset($username)) {
                   </tbody>
               </table>
         </div>
-        <div class="text-center">
-              <a href="../index.php" class="btn btn-primary">Back to Dashboard</a>
+        <style>
+        /* Custom styles for the spotlight and back button */
+        .inline-buttons > a,
+        .inline-buttons > a.btn-like {
+            display: inline-block;
+            margin-right: 10px; /* Adjust margin as needed */
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        </style>
+        
+            <div class="text-center"> <!-- Added text-center class -->
+
+            <!-- Back to Dashboard and Spotlight Management buttons on the same line -->
+            <div class="inline-buttons">
+                <a href="../index.php" class="btn-like">Back to Dashboard</a>
+                <a href="spotlight_content.php" class="btn-like">Manage Spotlight Items</a>
             </div>
+
+            </div>
+
       </div>
+
+      

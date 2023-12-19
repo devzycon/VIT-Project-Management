@@ -1,18 +1,51 @@
+<?php
+include 'Admin/classes/spotlight.php';
+$host = "localhost";
+$dbname = "db_admin";
+$username = "root";
+$password = "";
+
+try {
+    $your_pdo_connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $your_pdo_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Log the error
+    error_log("PDO Error: " . $e->getMessage());
+
+    // Set appropriate HTTP status code
+    http_response_code(500);
+
+    // Echo the error message
+    echo 'Error during PDO operation.';
+    exit;
+}
+
+$spotlight = new Spotlight($your_pdo_connection);
+
+// Fetch spotlight items
+$spotlightData = $spotlight->selectAllSpotlightData();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" src="https://main.js?attr=RQlKJqpTliPcz7Ld_NtzoZrYWQYfepfsRa0iuEYC1Lb9_-SOxMTYOuDuDj7oz5vj0b9gSeRui56hDfaWjk4rRQ" charset="UTF-8"></script>
     <title>VIT Chennai - BTECH CAPSTONE</title>
-    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="PreLogin.css" />
 </head>
+<style>
+    .larger-text {
+        font-size: 14px;
+    }
+</style>
 
 <body class="WhiteBackground">
     <nav class="navbar navbar-expand-lg bg-light headerBackgroundColor py-1 fixed-top shadow" id="vtopOpenPageHeader">
         <div class="container-fluid justify-content-start">
             <a class="navbar-brand" href="javacript:void(0);"> 
-                <img src="https://vtopcc.vit.ac.in/vtop/assets/img/VITLogoEmblem.png" class="img-responsive VITEmblem" />
+                <img src="images/vitlogo.webp" class="img-responsive VITEmblem" />
             </a>
             <a class="navbar-brand VITLogoStyle text-light" href="javascript:void(0);"><span class="h1 fw-bold">VIT</span></a>
                 &nbsp;&nbsp;
@@ -30,44 +63,41 @@
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 py-3 g-2 g-sm-5"> 
 
-                        <div class="col"> <!-- First column -->
-                            <div class="card card-body cardEmployee shadow">
-                                <form class="text-center" id="facForm" action="Faculty/login.php" method="post">
-                                    <a href="Faculty/login.php" class="text-decoration-none" onclick="javascript:submitForm('facForm')">
-                                        <div class="circle">
-                                            <div class="w-50">
-                                                <img src="https://vtopcc.vit.ac.in/vtop/assets/img/employee.png" class="img-responsive center imgSize"/>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <p>Faculty</p>
-                                                <div class="fw-bold employeeTextColor d-none d-lg-block h5"></div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </form>
-                            </div>
+                    <div class="col">
+                        <div class="card card-body cardEmployee shadow" style="display: flex; align-items: center;">
+                            <form class="text-center" id="facForm" action="Faculty/login.php" method="post">
+                                <a href="Faculty/login.php" class="text-decoration-none" onclick="javascript:submitForm('facForm')" style="display: flex; align-items: center;">
+                                    <div style="flex-shrink: 0; overflow: hidden; border-radius: 50%; margin-right: 15px;">
+                                        <img src="images/faculty.png" class="img-responsive center imgSize" style="max-width: 100%; height: auto; object-fit: cover;"/>
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <p style="margin: 0; font-weight: bold; font-size: 18px;">Faculty</p>
+                                        <div class="fw-bold employeeTextColor d-none d-lg-block h5"></div>
+                                    </div>
+                                </a>
+                            </form>
                         </div>
+                    </div>
+
                         
-                        <div class="col"> <!-- Second column -->
-                            <div class="card card-body cardAlumni shadow">
-                                <form class="text-center" id="adminForm" action="Admin/index.php" method="post">
-                                    <a href="Admin/login.php" class="text-decoration-none" onclick="javascript:submitForm('adminForm')">
-                                        <div class="circle">
-                                            <div class="w-50">
-                                                <img src="https://vtopcc.vit.ac.in/vtop/assets/img/alumni.png" class="img-responsive center imgSize" id="admin" />
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <p>Admin</p>
-                                                <div class="fw-bold text-info d-none d-lg-block h5"></div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </form>
-                            </div>
+                    <div class="col">
+                        <div class="card card-body cardAlumni shadow" style="display: flex; align-items: center;">
+                            <form class="text-center" id="adminForm" action="Admin/index.php" method="post">
+                                <a href="Admin/login.php" class="text-decoration-none" onclick="javascript:submitForm('adminForm')" style="display: flex; align-items: center;">
+                                    <div style="flex-shrink: 0; overflow: hidden; border-radius: 50%; margin-right: 15px;">
+                                        <img src="images/admin.png" class="img-responsive center imgSize" id="admin" style="max-width: 100%; height: auto; object-fit: cover;">
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <p style="margin: 0; font-weight: bold; font-size: 18px;">Admin</p>
+                                        <div class="fw-bold text-info d-none d-lg-block h5"></div>
+                                    </div>
+                                </a>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <div class="row mt-1 mb-3"> 
@@ -78,16 +108,15 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush text-start small spotlight-background">
+                        <?php foreach ($spotlightData as $item): ?>
                             <li class="list-group-item py-2 small">
                                 <div class="d-flex w-100 align-items-stretch justify-content-start">
                                     <div class="w-75 py-0">
-                                        <a class="list-group-item-action" target="_self" href="javascript:void(0);" onclick="javascript:void(0);">
-                                            <strong class="fw-bold text-dark">SOME CONTENT</strong>
-                                        </a>
+                                        <strong class="fw-bold text-dark larger-text"><?php echo $item->description; ?></strong>
                                     </div>
                                 </div>
                             </li>
-                            <!-- ADD THE REST OF THE CONTENT IN <LI> TAGS -->
+                        <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

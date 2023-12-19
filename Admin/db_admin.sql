@@ -103,3 +103,32 @@ ALTER TABLE `tbl_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
+ --------------------------------------------------------
+
+--
+-- Table structure for table `spotlight`
+--
+
+CREATE TABLE `spotlight` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `spotlight`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `spotlight`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Dumping data for table `spotlight`
+--
+
+INSERT INTO `spotlight` (`id`, `title`, `description`) VALUES
+(1, 'Testing', 'testing purpose');
+
+ --------------------------------------------------------
