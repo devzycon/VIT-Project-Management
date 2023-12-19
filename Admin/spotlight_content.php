@@ -177,26 +177,26 @@ function deleteItem(itemId) {
 
     <div class="card-body pr-2 pl-2">
     <!-- Display existing spotlight items -->
-    <table class="table table-striped table-bordered" style="width:100%" id="spotlightTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Action</th> 
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($spotlightData as $item): ?>
+        <table class="table table-striped table-bordered" style="width:100%" id="spotlightTable">
+            <thead>
                 <tr>
-                    <td><?php echo $item->id; ?></td>
-                    <td><?php echo $item->title; ?></td>
-                    <td><?php echo $item->description; ?></td>
-                    <td>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal<?php echo $item->id; ?>">Delete</button>
-                    </td>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
                 </tr>
-
+            </thead>
+            <tbody>
+                <?php foreach ($spotlightData as $item): ?>
+                    <tr id="itemRow-<?php echo $item->id; ?>">
+                        <td><?php echo $item->id; ?></td>
+                        <td><?php echo $item->title; ?></td>
+                        <td><?php echo $item->description; ?></td>
+                        <td>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal<?php echo $item->id; ?>">Delete</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#editItemModal<?php echo $item->id; ?>">Edit</button>
+                        </td>
+                    </tr>
                 <!-- Modal for confirmation before deletion -->
                 <div class="modal fade" id="deleteItemModal<?php echo $item->id; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel<?php echo $item->id; ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -213,6 +213,34 @@ function deleteItem(itemId) {
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" onclick="deleteItem(<?php echo $item->id; ?>)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal for editing item -->
+                <div class="modal fade" id="editItemModal<?php echo $item->id; ?>" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel<?php echo $item->id; ?>" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editItemModalLabel<?php echo $item->id; ?>">Edit Item</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Form for editing item -->
+                                <form method="POST" action="edit_spotlight_item.php">
+                                    <input type="hidden" name="itemId" value="<?php echo $item->id; ?>">
+                                    <div class="form-group">
+                                        <label for="editTitle">Title:</label>
+                                        <input type="text" class="form-control" id="editTitle" name="editTitle" value="<?php echo $item->title; ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editDescription">Description:</label>
+                                        <textarea class="form-control" id="editDescription" name="editDescription" rows="3" required><?php echo $item->description; ?></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </form>
                             </div>
                         </div>
                     </div>

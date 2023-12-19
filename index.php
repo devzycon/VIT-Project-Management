@@ -21,9 +21,9 @@ try {
 }
 
 $spotlight = new Spotlight($your_pdo_connection);
-
 // Fetch spotlight items
 $spotlightData = $spotlight->selectAllSpotlightData();
+
 ?>
 
 <!DOCTYPE html>
@@ -107,16 +107,8 @@ $spotlightData = $spotlight->selectAllSpotlightData();
                         <span class="fw-bold hightlight1 h6">Spotlight</span>
                     </div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush text-start small spotlight-background">
-                        <?php foreach ($spotlightData as $item): ?>
-                            <li class="list-group-item py-2 small">
-                                <div class="d-flex w-100 align-items-stretch justify-content-start">
-                                    <div class="w-75 py-0">
-                                        <strong class="fw-bold text-dark larger-text"><?php echo $item->description; ?></strong>
-                                    </div>
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
+                        <ul id="spotlightList" class="list-group list-group-flush text-start small spotlight-background">
+                            <!-- Spotlight content will be dynamically added here -->
                         </ul>
                     </div>
                 </div>
@@ -124,6 +116,9 @@ $spotlightData = $spotlight->selectAllSpotlightData();
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <script>
         var offsetHeight = document.getElementById('vtopOpenPageHeader').offsetHeight;
         document.body.style.marginTop = offsetHeight + 'px';
@@ -137,6 +132,38 @@ $spotlightData = $spotlight->selectAllSpotlightData();
         window.addEventListener('popstate', function () {
             history.pushState(null, null, document.URL);
         });
+        function updateSpotlight() {
+        fetch('get_spotlight_data.php')
+            .then(response => response.json())
+            .then(data => {
+                const spotlightList = document.getElementById('spotlightList');
+                spotlightList.innerHTML = ''; // Clear existing content
+
+                data.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item py-2 small';
+                    listItem.innerHTML = `<div class="d-flex w-100 align-items-stretch justify-content-start">
+                                            <div class="w-75 py-0">
+                                                <strong class="fw-bold text-dark larger-text">${item.description}</strong>
+                                            </div>
+                                        </div>`;
+                    spotlightList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error during the fetch request:', error);
+            });
+    }
+
+    // Call the update function on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        updateSpotlight();
+
+        // Refresh the page every 30 seconds
+        setInterval(function () {
+            location.reload();
+        }, 30000); // 30 seconds in milliseconds
+    });
     </script>
 </body>
 </html>
