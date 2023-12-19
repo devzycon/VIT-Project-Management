@@ -5,6 +5,7 @@ $dbname = "db_admin";
 $username = "root";
 $password = "";
 
+
 try {
     $your_pdo_connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $your_pdo_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
