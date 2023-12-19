@@ -3,7 +3,19 @@ include('config.php');
 
 $id = $_GET['id'];
 
+
+
 if (isset($_POST['submit'])) {
+
+    $start_date = strtotime('2023-12-19');
+    $current_date = time();
+    $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
+    if ($days_difference == 0)
+    {
+        $days_difference = 1;
+    }
+    $week_count = ceil($days_difference / 6);
+    $total_days = $week_count * 7;
     // Get the current value of no_of_present from the database
     $get_no_of_present_query = "SELECT no_of_present FROM student_data WHERE id=$id";
     $result = mysqli_query($con, $get_no_of_present_query);
@@ -32,12 +44,12 @@ if (isset($_POST['submit'])) {
     }
 
     // Calculate attendance percentage
-    $total_days = count($attendance);
+    
     $attend = ($no_of_present / $total_days) * 100;
     $attendance_percentage = number_format($attend, 2) . "%";
 
     // Update both attendance and no_of_present in a single query
-    $update = "UPDATE student_data SET attendance = '$attendance_percentage', no_of_present = '$no_of_present' WHERE id=$id";
+    $update = "UPDATE student_data SET attendance = '$attendance_percentage' WHERE id=$id";
     $run_update = mysqli_query($con, $update);
 
     if ($run_update) {
