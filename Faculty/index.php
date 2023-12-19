@@ -238,6 +238,13 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
                 $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
+                $start_date = strtotime('2023-12-19');
+                $current_date = time();
+                $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
+                if ($days_difference == 0) {
+                $days_difference = 1;
+                }
+                $week_count = ceil($days_difference / 6);
         		
 
         		echo "
@@ -405,7 +412,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                       <div class='container' id='profile'> 
                           <div class='row'>
                           <div class='col-md-5 offset-md-2'>
-                          <h2><b>WEEK 1</b></h2><br>
+                          <h2><b>WEEK $week_count</b></h2><br>
                           <form id='attendForm$id' action='attend.php?id=$id' method='post' enctype='multipart/form-data'>
                           <table class='table table-bordered table-striped table-hover custom-table'>
                               <tr>
@@ -516,7 +523,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         if (response.success) {
           alert('Attendance updated successfully');
           console.log('Updating attendance cell:', '#attendanceCell' + id);
-          $('#attendanceCell' + id).html(response.newAttendance); // Use .html() instead of .text()
+          $('#attendanceCell' + id).html(response.newAttendance);
         } else {
           alert('Error updating attendance: ' + response.message);
         }
@@ -528,6 +535,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
     });
   }
 </script>
+
+
 
 
 

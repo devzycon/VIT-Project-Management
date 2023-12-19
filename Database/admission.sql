@@ -120,7 +120,10 @@ ALTER TABLE `student_data`
 ADD `attendance` varchar(20) NOT NULL DEFAULT 0;
 
 ALTER TABLE `student_data`
-ADD `no_of_present` varchar(20) NOT NULL DEFAULT 0;
+ADD `no_of_present` int(20) NOT NULL DEFAULT 0;
+
+ALTER TABLE `student_data`
+ADD `no_of_absent` int(20) NOT NULL DEFAULT 0;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
