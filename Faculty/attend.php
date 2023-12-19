@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
     $run_update = mysqli_query($con, $update);
 
     if ($run_update) {
-        $response = array('success' => true, 'newAttendance' => $attendance_percentage);
+        $response = array('success' => true, 'newAttendance' => $attendance_percentage,'weekCount' => $week_count);
     } else {
         $response = array('success' => false, 'message' => 'Data not updated. Error: ' . mysqli_error($con));
     }

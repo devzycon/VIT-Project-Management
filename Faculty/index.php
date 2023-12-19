@@ -521,6 +521,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
       success: function(response) {
         console.log(response); // Log the entire response object for debugging
         if (response.success) {
+          $('#viewatt' + id + ' h2 b').text('WEEK ' + response.weekCount);
           alert('Attendance updated successfully');
           console.log('Updating attendance cell:', '#attendanceCell' + id);
           $('#attendanceCell' + id).html(response.newAttendance);
