@@ -65,6 +65,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_1 = $_POST['review_1'];
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
+                $edit_request_status= $_POST['edit_requests'];
                 
 
                 if ($u_project_type == 'PAT') {
@@ -111,10 +112,11 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="jquery.js"></script>
+    
+    <!-- <script src="jquery.js"></script> -->
     <script src="auto_logout.js"></script>
 
     <style>
@@ -205,6 +207,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         <th class="text-center" scope="col">Review 1</th>
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
+        <th class='text-center' scope='col'>Edit Request</th>
         <th class="text-center" scope="col">Project Name</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
@@ -227,6 +230,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 				        $u_project_type = $row['u_project_type'];
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
+                $edit_request_status = $row['edit_request_status']; 
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
@@ -353,6 +357,9 @@ if ($stmt = mysqli_prepare($con, $sql)) {
               <option value='In House' <?php echo ($u_project_type == 'In House') ? 'selected' : ''; ?>>In House</option>
               <option value='PAT' <?php echo ($u_project_type == 'PAT') ? 'selected' : ''; ?>>PAT</option>
               </select>
+              
+            
+
               <div class='form-row'>
               <div class='form-group col-md-12'>
                   <label for='project_name'>Project Name</label>
@@ -378,6 +385,16 @@ if ($stmt = mysqli_prepare($con, $sql)) {
   
     </div>
   </div>
+            
+  <td class='text-center'>
+          <form action='process_edit_requests.php' method='post' class='edit-request-form'>
+          <input type='hidden' name='student_id' value='$u_card'>
+          <button type='submit' class='btn btn-info edit-request-button' name='edit_request'>
+              Edit Request
+          </button>
+        </form>
+            </td>
+
 				</td> 
         <td class='text-center'>$project_name</td>
 			</tr>
@@ -398,6 +415,44 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 
 
 
+<script>
+    $(document).ready(function () {
+        $('.edit-request-form').submit(function (e) {
+            e.preventDefault();
+
+            // Get the form data
+            var formData = $(this).serialize();
+
+            // Send an AJAX request
+            $.ajax({
+                type: 'POST',
+                url: 'process_edit_requests.php',
+                data: formData,
+                success: function (response) {
+                        // Handle the response
+                        console.log(response);
+
+                        // You can update the UI or perform other actions based on the response
+                        if (response.success) {
+                            alert('Edit request submitted successfully!');
+                        } else {
+                            alert('Error submitting edit request: ' + response.message);
+                        }
+                    },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    console.log('AJAX request failed:', status, error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
 <table class="table table-bordered table-striped table-hover" id="myTable">
 <thead>
     <tr>
@@ -415,6 +470,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         <th class="text-center" scope="col">Review 1</th>
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
+       
         <th class="text-center" scope="col">Project Name</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
@@ -588,7 +644,10 @@ if ($stmt = mysqli_prepare($con, $sql)) {
       
         </div>
       </div>
-            </td> 
+            
+       
+
+          </td> 
             <td class='text-center'>$project_name</td>
           </tr>
         		";
@@ -629,7 +688,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 
 
         ?>
-        <form method="POST" enctype="multipart/form-data" action="process_form.php">
+        <form id="myForm" method="POST" enctype="multipart/form-data" action="process_form.php">
         <input type="hidden" name="token" value="<?php echo $_SESSION['form_token']; ?>">
 			
 			<!-- This is test for New Card Activate Form  -->
@@ -723,6 +782,35 @@ if (patCount >= 2) {
 }
 
 </script>
+
+
+<script>
+$(document).ready(function() {
+    $("#myForm").submit(function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Create a FormData object to send the form data (including files)
+        var formData = new FormData(this);
+
+        // Perform the Ajax request
+        $.ajax({
+            url: 'process_form.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'json', // Add this line
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });
+    });
+});
+</script>
+
 
 
 

@@ -28,8 +28,11 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['form_token']) {
    
 
     // Insert data into the database
-    $insert_data = "INSERT INTO student_data(faculty_id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type, review_0,project_name) VALUES ('$faculty_id','$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$review_0','$project_name')";
+    $insert_data = "INSERT INTO student_data(faculty_id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type,project_name) VALUES ('$faculty_id','$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$project_name')";
+
     $run_data = mysqli_query($con, $insert_data);
+
+    $response = array('status' => 'success', 'message' => 'Form submitted successfully');
 
     if ($run_data) {
         $added = true;
@@ -37,15 +40,23 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['form_token']) {
     } else {
         echo "Error: " . $insert_data . "<br>" . mysqli_error($con);
     }
-
-    if ($run_data) {
-        $added = true;
+    
+    
+    if ($added) {
+        $response = array('status' => 'success', 'message' => 'Form submitted successfully');
     } else {
-        echo "Data not inserted";
+        $response = array('status' => 'error', 'message' => 'Error submitting form');
+    }
+    
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        // Output JSON response only for AJAX requests
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
+    } else {
+        // Redirect for non-AJAX requests
+        header("Location: index.php");
+        exit();
     }
 }
-
-// Redirect the user after processing the form
-header("Location: index.php");
-exit();
 ?>

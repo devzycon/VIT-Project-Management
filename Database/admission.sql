@@ -39,8 +39,7 @@ CREATE TABLE `student_data` (
 
 --
 -- Dumping data for table `student_data`
-INSERT INTO student_data (id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type) VALUES
-(104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT');
+
 
 --
 
@@ -62,9 +61,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
-(5, 'kushkush', '$2y$10$pkgNOc0r6DaiDnCTIVT/VubRm0LqncpPgipzdARaH/9wZto.zmYLu', '2021-05-22 00:30:03'),
-(6, '123123', '$2y$10$AwA0obkWAdzF6Z6zCqZ3Xu5QinFNWhL89iAUde8YYfYorruaxOjCm', '2021-07-17 16:49:54');
+
 
 --
 -- Indexes for dumped tables
@@ -114,7 +111,12 @@ ADD `faculty_id` INT(10) NOT NULL;
 
 
 ALTER TABLE `student_data`
-ADD `project_name` varchar(50) ;
+ADD `project_name` varchar(50) NOT NULL;
+
+ALTER TABLE `student_data`
+ADD `edit_request_status` BOOLEAN DEFAULT 0;
+
+
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
