@@ -125,6 +125,29 @@ ADD `no_of_present` int(20) NOT NULL DEFAULT 0;
 ALTER TABLE `student_data`
 ADD `no_of_absent` int(20) NOT NULL DEFAULT 0;
 
+
+--
+-- Table structure for table `student_data`
+--
+
+CREATE TABLE `review1` (
+  `s_no` int(10) NOT NULL,
+  `s_pgm` varchar(12) NOT NULL,
+  `s_regno` varchar(15) NOT NULL,
+  `s_name` text NOT NULL,
+  `s_erp` varchar(12) NOT NULL,
+  `s_guide` text NOT NULL,
+  `s_panelno` varchar(50) NOT NULL,
+  `s_facultyrev` text NOT NULL,
+  `s_m1` int(10) NOT NULL,
+  `s_m2` int(10) NOT NULL,
+  `s_m3` int(10) NOT NULL,
+  `s_m4` int(10) NOT NULL,
+  `s_tot` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

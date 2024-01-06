@@ -188,6 +188,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 	<button class="btn btn-success" type="button" data-toggle="modal" id="submitBtn" data-target="#myModal">
   <i class="fa fa-plus"></i> Add New Student
   </button>
+  <a href="review1.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Review 1</a>
   <!-- <a href="export.php" class="btn btn-success pull-right"><i class="fa fa-download"></i> Export Data</a> -->
   <hr>
 		<table class="table table-bordered table-striped table-hover" id="myTable">
@@ -238,7 +239,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
                 $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
-                $start_date = strtotime('2023-12-19');
+                $start_date = strtotime('2024-01-06');
                 $current_date = time();
                 $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
                 if ($days_difference == 0) {

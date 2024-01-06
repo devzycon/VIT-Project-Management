@@ -5,7 +5,7 @@ $id = $_GET['id'];
 
 if (isset($_POST['submit'])) {
 
-    $start_date = strtotime('2023-12-19');
+    $start_date = strtotime('2024-01-06');
     $current_date = time();
     $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
     if ($days_difference == 0) {
