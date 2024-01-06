@@ -65,6 +65,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $u_review_1 = $_POST['review_1'];
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
+                $u_attendance = $_POST['attendance'];
+                $no_of_present = $_POST['no_of_present'];
                 
 
                 if ($u_project_type == 'PAT') {
@@ -113,7 +115,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="jquery.js"></script>
     <script src="auto_logout.js"></script>
 
@@ -206,6 +208,8 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
         <th class="text-center" scope="col">Project Name</th>
+        <th class="text-center" scope="col">Attendance</th>
+        <th class="text-center" scope="col">Enter Attendance</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
 </thead>
@@ -227,11 +231,20 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 				        $u_project_type = $row['u_project_type'];
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
+                $u_attendance = $row['attendance'];
+                $no_of_present = $row['no_of_present'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
                 $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
+                $start_date = strtotime('2023-12-19');
+                $current_date = time();
+                $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
+                if ($days_difference == 0) {
+                $days_difference = 1;
+                }
+                $week_count = ceil($days_difference / 6);
         		
 
         		echo "
@@ -380,6 +393,109 @@ if ($stmt = mysqli_prepare($con, $sql)) {
   </div>
 				</td> 
         <td class='text-center'>$project_name</td>
+        <td class='text-center' id='attendanceCell$id'>$u_attendance</td>
+
+<td class='text-center'>
+  <span>
+    <button class='btn btn-primary view-button' data-toggle='modal' type='button' data-target='#viewatt$id'>Enter</button>
+  </span>
+  <div class='modal fade' id='viewatt$id' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
+   <div class='modal-dialog modal-lg'>
+              <div class='modal-content'>
+                  <div class='modal-header'>
+                      <h5 class='modal-title' id='exampleModalLabel'>Student $sl <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                      <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                          <span aria-hidden='true'>&times;</span>
+                      </button>
+                  </div>
+                  <div class='modal-body'>
+                      <div class='container' id='profile'> 
+                          <div class='row'>
+                          <div class='col-md-5 offset-md-2'>
+                          <h2><b>WEEK $week_count</b></h2><br>
+                          <form id='attendForm$id' action='attend.php?id=$id' method='post' enctype='multipart/form-data'>
+                          <table class='table table-bordered table-striped table-hover custom-table'>
+                              <tr>
+                                <th>DAY</th>
+                                <th>Attendance</th>
+                              </tr>
+                              <tr>
+                                <td>Monday</td>
+                                <td>
+                                  <select name='attendance[Monday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Tuesday</td>
+                                <td>
+                                  <select name='attendance[Tuesday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Wednesday</td>
+                                <td>
+                                  <select name='attendance[Wednesday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Thursday</td>
+                                <td>
+                                  <select name='attendance[Thursday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Friday</td>
+                                <td>
+                                  <select name='attendance[Friday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Saturday</td>
+                                <td>
+                                  <select name='attendance[Saturday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Sunday</td>
+                                <td>
+                                  <select name='attendance[Sunday]' class='form-control' >
+                                    <option value='Present'>Present</option>
+                                    <option value='Absent'>Absent</option>
+                                  </select>
+                                </td>
+                              </tr>
+                            </table>
+                            <div class='modal-footer'>
+                            <input type='button' name='submit' class='btn btn-info btn-large' value='Calculate' onclick='submitForm($id)'>
+
+        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+      </div>
+    </form>
+                        </div>
+                      </div>   
+                  </div>
+              </div>
+          </div>
+          </div>
+        </td>
 			</tr>
         		";
             
@@ -387,6 +503,49 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         	}
            
         	    ?> 
+
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+<!-- Add the following script at the end of your HTML file -->
+
+<script>
+  function submitForm(id) {
+    var form = $('#attendForm' + id);
+
+    $.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      data: form.serialize() + '&submit=1',
+      dataType: 'json',
+      success: function(response) {
+        console.log(response); // Log the entire response object for debugging
+        if (response.success) {
+          $('#viewatt' + id + ' h2 b').text('WEEK ' + response.weekCount);
+          alert('Attendance updated successfully');
+          console.log('Updating attendance cell:', '#attendanceCell' + id);
+          $('#attendanceCell' + id).html(response.newAttendance);
+        } else {
+          alert('Error updating attendance: ' + response.message);
+        }
+      },
+      error: function(error) {
+        console.error('AJAX Error:', error);
+        alert('An error occurred while submitting the form.');
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
     var slValue = <?php echo $sl; ?>;
     if (slValue >= 5) {
