@@ -907,7 +907,10 @@ while ($row = mysqli_fetch_array($run_data)) {
   
   ?>
 
-
+<div class="text-center">
+              <a href="../index.php" class="btn btn-primary">Back to Dashboard</a>
+            </div>
+            
 
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>

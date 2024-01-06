@@ -200,5 +200,8 @@ require_once 'lib/Database.php';
             <button type="submit" name="download" class="btn btn-secondary">Download CSV</button>
         </form>
     </div>
+    <div class="text-center">
+              <a href="../index.php" class="btn btn-primary">Back to Dashboard</a>
+            </div>
 </body>
 </html>
