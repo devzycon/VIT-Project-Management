@@ -15,7 +15,7 @@ include ("config.php");
 $username = $_SESSION['username'];
 
 $sql = "SELECT faculty_id FROM users WHERE username = ?";
-if ($stmt = mysqli_prepare($con, $sql)) {
+if ($stmt = mysqli_prepare($connection, $sql)) {
     mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
 
     if (mysqli_stmt_execute($stmt)) {
@@ -30,7 +30,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
             // Get 'PAT' count
             $sql = "SELECT COUNT(*) AS patCount FROM student_data WHERE u_project_type = 'PAT' AND faculty_id = ?";
             
-            if ($stmt = mysqli_prepare($con, $sql)) {
+            if ($stmt = mysqli_prepare($connection, $sql)) {
                 mysqli_stmt_bind_param($stmt, "i", $faculty_id); // Assuming faculty_id is an integer
 
                 if (mysqli_stmt_execute($stmt)) {
@@ -44,10 +44,10 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 
                     mysqli_stmt_close($stmt);
                 } else {
-                    echo "Error executing the statement: " . mysqli_error($con);
+                    echo "Error executing the statement: " . mysqli_error($connection);
                 }
             } else {
-                echo "Error preparing statement: " . mysqli_error($con);
+                echo "Error preparing statement: " . mysqli_error($connection);
             }
 
             $added = false;
@@ -84,10 +84,10 @@ if ($stmt = mysqli_prepare($con, $sql)) {
             echo "Failed to fetch faculty_id.";
         }
     } else {
-        echo "Error executing the statement: " . mysqli_error($con);
+        echo "Error executing the statement: " . mysqli_error($connection);
     }
 } else {
-    echo "Error preparing statement: " . mysqli_error($con);
+    echo "Error preparing statement: " . mysqli_error($connectionnection);
 }
               ?>
 
@@ -127,9 +127,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
       .small-textbox {
           width: 50px; 
           margin-left: 200px;
-      }
-      .marks-align {
-          
       }
       .custom-container{
         margin-top: 60px;
@@ -185,7 +182,23 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 	<a href="logout.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Logout</a>
 	<button class="btn btn-success" type="button" data-toggle="modal" id="submitBtn" data-target="#myModal">
   <i class="fa fa-plus"></i> Add New Student
+
   </button>
+  
+<button class="btn btn-success" type="button" data-toggle="modal" id="review_1_button">Review-1</button>
+
+<!-- Display area for student details -->
+<div id="student_details"></div>
+
+<!-- Your existing JavaScript code -->
+<script>
+// When the "Review-1" button is clicked
+$('#review_1_button').on('click', function() {
+    // Redirect to student_details_page.php
+    window.location.href = 'stud.php';
+});
+</script>
+  <!-- <a href="stud.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Review-1</a> -->
   <!-- <a href="export.php" class="btn btn-success pull-right"><i class="fa fa-download"></i> Export Data</a> -->
   <hr>
 		<table class="table table-bordered table-striped table-hover" id="myTable">
@@ -213,7 +226,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 			<?php
 
         	$get_data = "SELECT * FROM student_data WHERE `faculty_id`=$faculty_id order by 1 desc";
-        	$run_data = mysqli_query($con,$get_data);
+        	$run_data = mysqli_query($connection,$get_data);
 			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
@@ -423,7 +436,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 			<?php
 
         	$get_data = "SELECT * FROM student_data WHERE `faculty_id`=$faculty_id  and `u_project_type`='pat'order by 1 desc";
-        	$run_data = mysqli_query($con,$get_data);
+        	$run_data = mysqli_query($connection,$get_data);
 			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
@@ -819,7 +832,7 @@ if (patCount >= 2) {
 
 <?php
 $get_data = "SELECT * FROM student_data";
-$run_data = mysqli_query($con, $get_data);
+$run_data = mysqli_query($connection, $get_data);
 
 while ($row = mysqli_fetch_array($run_data)) {
     $id = $row['id'];

@@ -14,7 +14,7 @@ if(isset($_POST['submit']))
 	
 
 	$update = "UPDATE student_data SET u_card='$u_card', u_f_name = '$u_f_name', u_l_name = '$u_l_name', u_email = '$u_email', u_phone = '$u_phone',u_project_type= '$u_project_type' WHERE id=$id";
-	$run_update = mysqli_query($con,$update);
+	$run_update = mysqli_query($connection,$update);
 
 	if($run_update){
 		header('location:index.php');

@@ -12,12 +12,12 @@ if(isset($_POST['submit']))
 	
 
 	$update = "UPDATE student_data SET review_0 = '$review_0' WHERE id=$id";
-	$run_update = mysqli_query($con,$update);
+	$run_update = mysqli_query($connection,$update);
 
 	if ($run_update) {
 		header('location:index.php');
 	} else {
-		echo "Data not updated. Error: " . mysqli_error($con);
+		echo "Data not updated. Error: " . mysqli_error($connection);
 	}
 }
 
