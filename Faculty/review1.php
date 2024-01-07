@@ -66,6 +66,7 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                 $s_m2 = $_POST['s_m2'];
                 $s_m3 = $_POST['s_m3'];
                 $s_m4 = $_POST['s_m4'];
+                $s_tot = $_POST['s_tot'];
             }
 
             $_SESSION['form_token'] = bin2hex(random_bytes(32));
@@ -139,6 +140,17 @@ if ($stmt = mysqli_prepare($con, $sql)) {
         margin-left: 40%;
         margin-bottom: 4%;
       }
+      
+    .center-table {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    #table_mark{
+        
+    }
+
     </style>
 
 </head>
@@ -204,40 +216,41 @@ if ($stmt = mysqli_prepare($con, $sql)) {
 			    $i = 0;
         	while($row = mysqli_fetch_array($run_data))
         	{
-                $us_no = $row['s_no'];
-                $us_pgm = $row['s_pgm'];
-                $us_regno = $row['s_regno'];
-                $us_name = $row['s_name'];
-                $us_erp = $row['s_erp'];
-                $us_guide = $row['s_guide'];
-                $us_panelno = $row['s_panelno'];
-                $us_facultyrev = $row['s_facultyrev'];
-                $us_m1 = $row['s_m1'];
-                $us_m2 = $row['s_m2'];
-                $us_m3 = $row['s_m3'];
-                $us_m4 = $row['s_m4'];
-                $us_tot = $row['s_tot'];
+                $s_no = $row['s_no'];
+                $s_pgm = $row['s_pgm'];
+                $s_regno = $row['s_regno'];
+                $s_name = $row['s_name'];
+                $s_erp = $row['s_erp'];
+                $s_guide = $row['s_guide'];
+                $s_panelno = $row['s_panelno'];
+                $s_facultyrev = $row['s_facultyrev'];
+                $s_m1 = $row['s_m1'];
+                $s_m2 = $row['s_m2'];
+                $s_m3 = $row['s_m3'];
+                $s_m4 = $row['s_m4'];
+                $s_tot = $row['s_tot'];
+                
         		
 
         		echo "
 				<tr>
-				<td class='text-center' id='serial'>$us_no</td>
-				<td class='text-left'>$us_pgm</td>
-				<td class='text-left'>$us_regno</td>
-				<td class='text-left'>$us_name</td>
-                <td class='text-center'>$us_erp</td>
-				<td class='text-center'>$us_guide</td>
-                <td class='text-center'>$us_panelno</td>
-                <td class='text-center'>$us_facultyrev</td>
+				<td class='text-center' id='serial'>$s_no</td>
+				<td class='text-left'>$s_pgm</td>
+				<td class='text-left'>$s_regno</td>
+				<td class='text-left'>$s_name</td>
+                <td class='text-center'>$s_erp</td>
+				<td class='text-center'>$s_guide</td>
+                <td class='text-center'>$s_panelno</td>
+                <td class='text-center'>$s_facultyrev</td>
                 <td class='text-center'>
 					<span>
-					    <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$us_no'>View</button>
+					    <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$s_no'>View</button>
 					</span>
-                    <div class='modal fade' id='rev1$us_no' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
+                    <div class='modal fade' id='rev1$s_no' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-lg'>
                         <div class='modal-content'>
                             <div class='modal-header'>
-                                <h5 class='modal-title' id='exampleModalLabel'>Student $us_no <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
+                                <h5 class='modal-title' id='exampleModalLabel'>Student $s_no <i class='fa fa-user-circle-o' aria-hidden='true'></i></h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
@@ -245,10 +258,11 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                             <div class='modal-body'>
                                 <div class='container' id='profile'> 
                                     <div class='row'>
-                                    <div class='col-md-5 offset-md-2'>
-                                    <table class='table table-bordered table-striped table-hover custom-table'>
+                                    <div class='col-md-5 offset-md-2' style = 'padding = 50px'>
+                                    <form action='review1_mark.php?s_no=$s_no' id='reviewForm' method='post' enctype='multipart/form-data'>
+                                    <table class='table table-bordered table-striped table-hover custom-table '>
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th class='text-center' scope='col'>Review 1</th>
                                             <th class='text-center' scope='col'>Knowledge on Research Domain</th>
                                             <th class='text-center' scope='col'>Literature Review</th>
@@ -257,28 +271,32 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                                             <th class='text-center' scope='col'>Total</th>
                                         </tr>
                                     </thead>
-                                      <tr>
-                                        <td class='text-left'>MARKS</td>
-                                        <form action='review0.php?id=$id' id='reviewForm' method='post' enctype='multipart/form-data'>
-                                            <td class='text-left'>
-                                                <input type='number' id='us_m1' name='us_m1' value='$us_m1' width=1px min='0' max='5' required><br>
-                                            </td>
-                                            <td class='text-left'>
-                                                <input type='number' id='us_m2' name='us_m2' value='$us_m2' width=1px min='0' max='5' required><br>
-                                            </td>
-                                            <td class='text-center'>
-                                                <input type='number' id='us_m3' name='us_m3' value='$us_m3' width=1px min='0' max='5' required><br>
-                                            </td>
-                                            <td class='text-center'>
-                                                <input type='number' id='us_m3' name='us_m4' value='$us_m4' width=1px min='0' max='5' required><br>
-                                            </td>
-                                            <td class='text-center'>
-                                                <input type='number' id='us_m3' name='us_tot' value='$us_tot' width=1px min='0' max='5' required><br>
-                                            </td>
-                                        </form>
-                                      </tr>
+                                    <tr>
+                                    <td class='text-left'>MARKS</td>
+                                    
+                                        <td class='text-left'>
+                                            <input type='number' id='us_m1' name='us_m1' value='$s_m1' width=1px min='0' max='5' required><br>
+                                        </td>
+                                        <td class='text-left'>
+                                            <input type='number' id='us_m2' name='us_m2' value='$s_m2' width=1px min='0' max='5' required><br>
+                                        </td>
+                                        <td class='text-center'>
+                                            <input type='number' id='us_m3' name='us_m3' value='$s_m3' width=1px min='0' max='5' required><br>
+                                        </td>
+                                        <td class='text-center'>
+                                            <input type='number' id='us_m4' name='us_m4' value='$s_m4' width=1px min='0' max='5' required><br>
+                                        </td>
+                                        <td class='text-center'>
+                                            $s_tot
+                                           
+                                        </td>
+                                    
+                                </tr>
                                     </table>
+                                    <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit'>
+                                </form>
                                 </div>
+                                
                                 </div>   
                             </div>
                             <div class='modal-footer'>
@@ -289,9 +307,15 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                     </div>
 				</td>
 			</tr>
+
+            
         		";
             
 
         	}
+
+            
            
         	    ?>
+
+                

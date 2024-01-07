@@ -5,15 +5,15 @@ $id = $_GET['id'];
 
 if (isset($_POST['submit'])) {
 
-    $start_date = strtotime('2024-01-06');
+    $start_date = strtotime('2024-01-07');
     $current_date = time();
     $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
     if ($days_difference == 0) {
         $days_difference = 1;
     }
     $week_count = ceil($days_difference / 6);
-    $total_days = $week_count * 7;
-    $initial_attendance = $total_days - 7;
+    $total_days = $week_count * 5;
+    $initial_attendance = $total_days - 5;
 
 
     // Get the current value of no_of_present from the database

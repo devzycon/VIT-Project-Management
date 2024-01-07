@@ -465,24 +465,6 @@ if ($stmt = mysqli_prepare($con, $sql)) {
                                   </select>
                                 </td>
                               </tr>
-                              <tr>
-                                <td>Saturday</td>
-                                <td>
-                                  <select name='attendance[Saturday]' class='form-control' >
-                                    <option value='Present'>Present</option>
-                                    <option value='Absent'>Absent</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Sunday</td>
-                                <td>
-                                  <select name='attendance[Sunday]' class='form-control' >
-                                    <option value='Present'>Present</option>
-                                    <option value='Absent'>Absent</option>
-                                  </select>
-                                </td>
-                              </tr>
                             </table>
                             <div class='modal-footer'>
                             <input type='button' name='submit' class='btn btn-info btn-large' value='Calculate' onclick='submitForm($id)'>
