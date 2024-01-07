@@ -29,13 +29,13 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['form_token']) {
 
     // Insert data into the database
     $insert_data = "INSERT INTO student_data(faculty_id, u_card, u_f_name, u_l_name, u_email, u_phone, u_project_type, review_0,project_name) VALUES ('$faculty_id','$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$review_0','$project_name')";
-    $run_data = mysqli_query($con, $insert_data);
+    $run_data = mysqli_query($connection, $insert_data);
 
     if ($run_data) {
         $added = true;
         $_SESSION['form_submissions'] = 0;
     } else {
-        echo "Error: " . $insert_data . "<br>" . mysqli_error($con);
+        echo "Error: " . $insert_data . "<br>" . mysqli_error($connection);
     }
 
     if ($run_data) {

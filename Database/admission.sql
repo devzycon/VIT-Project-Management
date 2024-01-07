@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+
 -- Generation Time: Jan 07, 2024 at 03:02 PM
+
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -290,15 +292,18 @@ CREATE TABLE `student_data` (
   `u_project_type` varchar(50) NOT NULL,
   `review_0` varchar(10) NOT NULL DEFAULT '0',
   `faculty_id` int(10) NOT NULL,
+
   `project_name` varchar(50) DEFAULT NULL,
   `attendance` varchar(10) DEFAULT NULL,
   `no_of_present` int(10) NOT NULL DEFAULT 0,
   `no_of_absent` int(10) NOT NULL DEFAULT 0
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student_data`
 --
+
 
 INSERT INTO `student_data` (`id`, `u_card`, `u_f_name`, `u_l_name`, `u_email`, `u_phone`, `u_project_type`, `review_0`, `faculty_id`, `project_name`, `attendance`, `no_of_present`, `no_of_absent`) VALUES
 (104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT', '0', 0, NULL, '0', 0, 0),
@@ -325,6 +330,34 @@ CREATE TABLE `student_table` (
   `s_tot` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `student_data` (`id`, `u_card`, `u_f_name`, `u_l_name`, `u_email`, `u_phone`, `u_project_type`, `review_0`, `faculty_id`, `project_name`) VALUES
+(104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT', '0', 0, NULL),
+(124, '76352876325', 'saravana', 'kumar', 'shggfasg@gmail.com', '6846546987', 'In House', '5', 50007, 'fddfbsdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_table`
+--
+
+CREATE TABLE `student_table` (
+  `SNO` double DEFAULT NULL,
+  `PGM` varchar(100) DEFAULT NULL,
+  `REG_NO` varchar(100) DEFAULT NULL,
+  `STUDENT_NAME` varchar(100) DEFAULT NULL,
+  `_ERP_ID` double DEFAULT NULL,
+  `GUIDE_NAME` varchar(100) DEFAULT NULL,
+  `PANEL_NO` varchar(100) DEFAULT NULL,
+  `s_m1` int(10) NOT NULL DEFAULT 0,
+  `s_m2` int(10) NOT NULL DEFAULT 0,
+  `s_m3` int(10) NOT NULL DEFAULT 0,
+  `s_m4` int(10) NOT NULL DEFAULT 0,
+  `s_tot` int(10) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_table`
 --
 -- Dumping data for table `student_table`
 --
@@ -1347,8 +1380,39 @@ ALTER TABLE `student_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
+
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+-- CREATE A NEW COLUMN REVIEW 0
+
+ALTER TABLE `student_data`
+  ADD `review_0` varchar(10) NOT NULL DEFAULT 0;
+
+
+ALTER TABLE`users`
+  ADD `faculty_id` int(10) NOT NULL;
+
+
+ALTER TABLE `student_data`
+ADD `faculty_id` INT(10) NOT NULL;
+
+
+ALTER TABLE `student_data`
+ADD `project_name` varchar(50) ;
+
+ALTER TABLE `student_data`
+ADD `attendance` varchar(20) NOT NULL DEFAULT 0;
+
+ALTER TABLE `student_data`
+ADD `no_of_present` int(20) NOT NULL DEFAULT 0;
+
+ALTER TABLE `student_data`
+ADD `no_of_absent` int(20) NOT NULL DEFAULT 0;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
