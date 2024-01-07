@@ -185,7 +185,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
 
   </button>
   
-<button class="btn btn-success" type="button" data-toggle="modal" id="review_1_button">Review-1</button>
+  <a href="review1.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Review 1</a>
 
 <!-- Display area for student details -->
 <div id="student_details"></div>
