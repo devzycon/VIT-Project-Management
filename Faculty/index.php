@@ -115,7 +115,6 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
-    <script src="auto_logout.js"></script>
 
     <style>
       body
@@ -185,7 +184,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
 
   </button>
   
-  <a href="review1.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Review 1</a>
+  <a href="review1.php" class="btn btn-success"><i class="fa lo"></i> Review 1</a>
 
 <!-- Display area for student details -->
 <div id="student_details"></div>

@@ -103,7 +103,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="jquery.js"></script>
-    <script src="auto_logout.js"></script>
+    
 
     <style>
       body
@@ -181,10 +181,9 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
           <strong class="h2 align-self-center primaryTextColor1 fw-bold text-center"><b>Student Details</b></strong>
       </div>
 
-	<a href="logout.php" class="btn btn-danger"><i class="fa fa-lock lo"></i> Logout</a>
-	<button class="btn btn-success" type="button" data-toggle="modal" id="submitBtn" data-target="#myModal">
-  <i class="fa fa-plus"></i> Add New Student
-  </button>
+	
+
+  <a href="index.php" class="btn btn-success"><i class="fa lo"></i> back</a>
   <!-- <a href="export.php" class="btn btn-success pull-right"><i class="fa fa-download"></i> Export Data</a> -->
   <hr>
 		<table class="table table-bordered table-striped table-hover" id="myTable">
@@ -254,7 +253,7 @@ while($row = mysqli_fetch_array($run_data))
                     <div class='container' id='profile'> 
                         <div class='row'>
                         <div class='col-md-5 offset-md-2' style = 'padding = 50px'>
-                        <form action='review1_mark.php?s_no=$REG_NO' id='reviewForm' method='post' enctype='multipart/form-data'>
+                        <form action='review1_mark.php?REG_NO=$REG_NO' id='reviewForm' method='post' enctype='multipart/form-data'>
                         <table class='table table-bordered table-striped table-hover custom-table '>
                         <thead>
                             <tr >

@@ -16,11 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Update the database with the new marks and total
     $update_query = "UPDATE student_table SET s_m1 = '$us_m1', s_m2 = '$us_m2', s_m3 = '$us_m3', s_m4 = '$us_m4', s_tot = '$us_tot' WHERE REG_NO = '$REG_NO'";
 
-    if (mysqli_query($connection, $update_query)) {
-        header('location:review1.php');
-    } else {
-        echo "Error updating marks: " . mysqli_error($connection);
-    }
+    $update_query = "UPDATE student_table SET s_m1 = '$us_m1', s_m2 = '$us_m2', s_m3 = '$us_m3', s_m4 = '$us_m4', s_tot = '$us_tot' WHERE REG_NO = '$REG_NO'";
+
+$result = mysqli_query($connection, $update_query);
+if ($result) {
+    header('location: review1.php');
+} else {
+    echo "Error updating marks: " . mysqli_error($connection);
+}
 
     // Close the database connection
     mysqli_close($connection);
