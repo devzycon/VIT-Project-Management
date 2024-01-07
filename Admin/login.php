@@ -46,6 +46,9 @@ if (isset($logout)) {
 
 
             </form>
+            <div class="text-center">
+              <a href="../index.php" class="btn btn-primary">Back to Dashboard</a>
+            </div>
           </div>
 
 

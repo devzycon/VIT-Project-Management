@@ -1344,8 +1344,35 @@ ALTER TABLE `student_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
+
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+-- CREATE A NEW COLUMN REVIEW 0
+
+ALTER TABLE `student_data`
+  ADD `review_0` varchar(10) NOT NULL DEFAULT 0;
+
+
+ALTER TABLE`users`
+  ADD `faculty_id` int(10) NOT NULL;
+
+
+ALTER TABLE `student_data`
+ADD `faculty_id` INT(10) NOT NULL;
+
+
+ALTER TABLE `student_data`
+ADD `project_name` varchar(50) ;
+
+ALTER TABLE `student_data`
+ADD `attendance` varchar(20) NOT NULL DEFAULT 0;
+
+ALTER TABLE `student_data`
+ADD `no_of_present` int(20) NOT NULL DEFAULT 0;
+
+ALTER TABLE `student_data`
+ADD `no_of_absent` int(20) NOT NULL DEFAULT 0;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

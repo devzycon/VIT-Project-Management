@@ -173,6 +173,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </div>
   <div class="card-footer"><a  href="register.php" type="submit">Create Account</a></div>
     </div>
+    <br>
+    <div class="text-center">
+              <a href="../index.php" class="btn btn-primary">Back to Dashboard</a>
+            </div>
 </div>
 <!-- <center>
 <img src='C.png' id="logo">
