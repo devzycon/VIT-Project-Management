@@ -51,7 +51,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (50239, 'Prof.', 'Khadar Nawas K', 'PANEL-10'),
 (50249, 'Dr.', 'Prakash B', 'PANEL-11'),
 (50250, 'Dr.', 'Maheswari S', 'PANEL-12'),
-(50266, 'Dr.', 'Shridevi S', 'PANEL-13'),
+(53387, 'Dr.', 'Anita Christaline J', 'PANEL-13'),
 (50270, 'Dr.', 'Vijayalakshmi A', 'PANEL-14'),
 (50276, 'Dr.', 'B V A N S S Prabhakar Rao', 'PANEL-15'),
 (50289, 'Dr.', 'Premalatha M', 'PANEL-16'),
