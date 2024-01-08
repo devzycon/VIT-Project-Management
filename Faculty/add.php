@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
 	$review_0 = $_POST['u_review_0'];
 
 	  $insert_data = "INSERT INTO student_data(u_card, u_f_name, u_l_name,u_email, u_phone, project, review_0,project_name) VALUES ('$u_card','$u_f_name','$u_l_name','$u_email','$u_phone','$u_project_type','$project_name' )";
-  	$run_data = mysqli_query($con,$insert_data);
+  	$run_data = mysqli_query($connection,$insert_data);
 
   	if($run_data){
 		  $added = true;

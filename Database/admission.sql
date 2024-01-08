@@ -3,9 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-
--- Generation Time: Jan 07, 2024 at 03:02 PM
-
+-- Generation Time: Jan 08, 2024 at 10:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -292,22 +290,19 @@ CREATE TABLE `student_data` (
   `u_project_type` varchar(50) NOT NULL,
   `review_0` varchar(10) NOT NULL DEFAULT '0',
   `faculty_id` int(10) NOT NULL,
-
   `project_name` varchar(50) DEFAULT NULL,
-  `attendance` varchar(10) DEFAULT NULL,
+  `attendance` varchar(10) NOT NULL,
   `no_of_present` int(10) NOT NULL DEFAULT 0,
   `no_of_absent` int(10) NOT NULL DEFAULT 0
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student_data`
 --
 
-
 INSERT INTO `student_data` (`id`, `u_card`, `u_f_name`, `u_l_name`, `u_email`, `u_phone`, `u_project_type`, `review_0`, `faculty_id`, `project_name`, `attendance`, `no_of_present`, `no_of_absent`) VALUES
-(104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT', '0', 0, NULL, '0', 0, 0),
-(124, '76352876325', 'saravana', 'kumar', 'shggfasg@gmail.com', '6846546987', 'In House', '5', 50007, 'fddfbsdf', '100.00%', 0, 0);
+(104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT', '0', 0, NULL, '', 0, 0),
+(134, '23MCA1067', 'VISHAL', 'P', 'vishal@gmail.com', '8p667528128', 'PAT', '', 588880, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -330,34 +325,6 @@ CREATE TABLE `student_table` (
   `s_tot` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
-INSERT INTO `student_data` (`id`, `u_card`, `u_f_name`, `u_l_name`, `u_email`, `u_phone`, `u_project_type`, `review_0`, `faculty_id`, `project_name`) VALUES
-(104, '231313', 'surajj', 'kumaran', 'surajj@gmail.com', '23234242', 'PAT', '0', 0, NULL),
-(124, '76352876325', 'saravana', 'kumar', 'shggfasg@gmail.com', '6846546987', 'In House', '5', 50007, 'fddfbsdf');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `student_table`
---
-
-CREATE TABLE `student_table` (
-  `SNO` double DEFAULT NULL,
-  `PGM` varchar(100) DEFAULT NULL,
-  `REG_NO` varchar(100) DEFAULT NULL,
-  `STUDENT_NAME` varchar(100) DEFAULT NULL,
-  `_ERP_ID` double DEFAULT NULL,
-  `GUIDE_NAME` varchar(100) DEFAULT NULL,
-  `PANEL_NO` varchar(100) DEFAULT NULL,
-  `s_m1` int(10) NOT NULL DEFAULT 0,
-  `s_m2` int(10) NOT NULL DEFAULT 0,
-  `s_m3` int(10) NOT NULL DEFAULT 0,
-  `s_m4` int(10) NOT NULL DEFAULT 0,
-  `s_tot` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `student_table`
 --
 -- Dumping data for table `student_table`
 --
@@ -387,7 +354,7 @@ INSERT INTO `student_table` (`SNO`, `PGM`, `REG_NO`, `STUDENT_NAME`, `_ERP_ID`, 
 (22, 'BCE', '20BCE1049', 'KEERTHANA S', 50380, 'RAJARAJESWARI S', 'PANEL-3', 0, 0, 0, 0, 0),
 (23, 'BCE', '20BCE1050', 'SANJEET V', 52193, 'N G BHUVANESWARI ', 'PANEL-3', 0, 0, 0, 0, 0),
 (24, 'BCE', '20BCE1053', 'RITWIK SINGH', 50616, 'JANAKI MEENA M', 'PANEL-3', 0, 0, 0, 0, 0),
-(25, 'BCE', '20BCE1054', 'DARSHINI R', 52310, 'MARIA ANU', 'PANEL-4', 0, 0, 0, 0, 0),
+(25, 'BCE', '20BCE1054', 'DARSHINI R', 52310, 'MARIA ANU', 'PANEL-4', 5, 4, 3, 3, 15),
 (26, 'BCE', '20BCE1055', 'MANASA R', 50318, 'NIVEDITA M', 'PANEL-4', 0, 0, 0, 0, 0),
 (27, 'BCE', '20BCE1058', 'PATRICK RAJA S', 53105, 'BALASARASWATHI', 'PANEL-4', 0, 0, 0, 0, 0),
 (28, 'BCE', '20BCE1064', 'SAURABH MALI', 53076, 'KARTHIKA V', 'PANEL-4', 0, 0, 0, 0, 0),
@@ -611,7 +578,7 @@ INSERT INTO `student_table` (`SNO`, `PGM`, `REG_NO`, `STUDENT_NAME`, `_ERP_ID`, 
 (246, 'BCE', '20BCE1550', 'SAMRIDH ANAND PAATNI', 53053, 'ANCY MICHEAL A', 'PANEL-31', 0, 0, 0, 0, 0),
 (247, 'BCE', '20BCE1551', 'BACHAM SAI VENKATA TEJA', 53073, 'SENTHIL PRAKASH P N', 'PANEL-31', 0, 0, 0, 0, 0),
 (248, 'BCE', '20BCE1553', 'MALLAPALLI KUSUMASAI', 50270, 'VIJAYALAKSHMI A', 'PANEL-31', 0, 0, 0, 0, 0),
-(249, 'BCE', '20BCE1554', 'ATHARVA VINOD UMBRE', 50587, 'GEETHA S', 'PANEL-32', 0, 0, 0, 0, 0),
+(249, 'BCE', '20BCE1554', 'ATHARVA VINOD UMBRE', 50587, 'GEETHA S', 'PANEL-32', 4, 4, 5, 0, 13),
 (250, 'BCE', '20BCE1555', 'UJJWAL GUPTA', 50430, 'PRABHAKARAN R', 'PANEL-32', 0, 0, 0, 0, 0),
 (251, 'BCE', '20BCE1556', 'VANZARA JUI SAMIRBHAI', 50398, 'SIVABALAKRISHNAN M', 'PANEL-32', 0, 0, 0, 0, 0),
 (252, 'BCE', '20BCE1557', 'ADARSH KUMAR', 52275, 'NOEL JEYGAR ROBERT V', 'PANEL-32', 0, 0, 0, 0, 0),
@@ -1345,9 +1312,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `faculty_id`) VALUES
 (5, 'kushkush', '$2y$10$pkgNOc0r6DaiDnCTIVT/VubRm0LqncpPgipzdARaH/9wZto.zmYLu', '2021-05-22 00:30:03', 0),
-(6, '123123', '$2y$10$AwA0obkWAdzF6Z6zCqZ3Xu5QinFNWhL89iAUde8YYfYorruaxOjCm', '2021-07-17 16:49:54', 0),
-(7, 'saravana', '$2y$10$QcyBaGG69o9HK0ZOW36kBeHSQynvbU3zBC6yFQqIphCTkDFO/Doem', '2024-01-07 16:18:47', 50007),
-(8, 'kumar', '$2y$10$54io8Lri5uYRJ6ENq1Dmiut6gdfHdc3pAXXuYCoN5FVlgKnF2TAcO', '2024-01-07 18:01:18', 50063);
+(6, '123123', '$2y$10$AwA0obkWAdzF6Z6zCqZ3Xu5QinFNWhL89iAUde8YYfYorruaxOjCm', '2021-07-17 16:49:54', 0);
 
 --
 -- Indexes for dumped tables
@@ -1374,45 +1339,14 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `student_data`
 --
 ALTER TABLE `student_data`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
-
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
--- CREATE A NEW COLUMN REVIEW 0
-
-ALTER TABLE `student_data`
-  ADD `review_0` varchar(10) NOT NULL DEFAULT 0;
-
-
-ALTER TABLE`users`
-  ADD `faculty_id` int(10) NOT NULL;
-
-
-ALTER TABLE `student_data`
-ADD `faculty_id` INT(10) NOT NULL;
-
-
-ALTER TABLE `student_data`
-ADD `project_name` varchar(50) ;
-
-ALTER TABLE `student_data`
-ADD `attendance` varchar(20) NOT NULL DEFAULT 0;
-
-ALTER TABLE `student_data`
-ADD `no_of_present` int(20) NOT NULL DEFAULT 0;
-
-ALTER TABLE `student_data`
-ADD `no_of_absent` int(20) NOT NULL DEFAULT 0;
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

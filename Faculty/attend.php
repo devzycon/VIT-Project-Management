@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 
     // Get the current value of no_of_present from the database
     $get_no_of_present_query = "SELECT no_of_present, attendance, no_of_absent FROM student_data WHERE id=$id";
-    $result = mysqli_query($con, $get_no_of_present_query);
+    $result = mysqli_query($connection, $get_no_of_present_query);
 
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         $attendance_percentage = $row['attendance'];
     } else {
         // Handle the error if the query fails
-        $response = array('success' => false, 'message' => 'Error fetching current value of no_of_present: ' . mysqli_error($con));
+        $response = array('success' => false, 'message' => 'Error fetching current value of no_of_present: ' . mysqli_error($connection));
         echo json_encode($response);
         exit;
     }
@@ -46,10 +46,10 @@ if (isset($_POST['submit'])) {
 
         // Update no_of_present with initial_attendance
         $update_no_of_present_query = "UPDATE student_data SET no_of_present = $initial_percentage,no_of_absent = '$absent' WHERE id=$id";
-        $run_update_no_of_present = mysqli_query($con, $update_no_of_present_query);
+        $run_update_no_of_present = mysqli_query($connection, $update_no_of_present_query);
 
         if (!$run_update_no_of_present) {
-            $response = array('success' => false, 'message' => 'Error updating no_of_present: ' . mysqli_error($con));
+            $response = array('success' => false, 'message' => 'Error updating no_of_present: ' . mysqli_error($connection));
             echo json_encode($response);
             exit;
         }
@@ -74,12 +74,12 @@ if (isset($_POST['submit'])) {
 
     // Update both attendance and no_of_present in a single query
     $update = "UPDATE student_data SET attendance = '$attendance_percentage' WHERE id=$id";
-    $run_update = mysqli_query($con, $update);
+    $run_update = mysqli_query($connection, $update);
 
     if ($run_update) {
         $response = array('success' => true, 'newAttendance' => $attendance_percentage,'weekCount' => $week_count);
     } else {
-        $response = array('success' => false, 'message' => 'Data not updated. Error: ' . mysqli_error($con));
+        $response = array('success' => false, 'message' => 'Data not updated. Error: ' . mysqli_error($connection));
     }
 
     echo json_encode($response);

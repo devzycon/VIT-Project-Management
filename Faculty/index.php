@@ -542,14 +542,7 @@ $('#review_1_button').on('click', function() {
 
 
 
-<script type="text/javascript">
-    var slValue = <?php echo $sl; ?>;
-    if (slValue >= 5) {
-        // If slValue is greater than 5, disable the button
-        document.getElementById("submitBtn").disabled = true;
-        // Optionally, you can display an alert message
-    }
-</script>
+
 
 
 
@@ -826,7 +819,7 @@ $u_project_type = isset($u_project_type) ? $u_project_type : "Select"; // Set to
 
 <div class="form-group col-md-6">
 <label for="email">Project Type</label>
-<select id="projectType" name="project_type" class="form-control" onchange="updateDropdown()">
+<select id="projectType" name="project_type" class="form-control">
     <option value="" <?php echo ($u_project_type == '') ? 'selected' : ''; ?> disabled>Select</option>
     <option value="In House" <?php echo ($u_project_type == 'In House') ? 'selected' : ''; ?>>In House</option>
     <option value="PAT" <?php echo ($u_project_type == 'PAT') ? 'selected' : ''; ?>>PAT</option>
@@ -857,27 +850,7 @@ $u_project_type = isset($u_project_type) ? $u_project_type : "Select"; // Set to
   </div>
 </div>
 
-<script>
-   var patCount = <?php echo isset($_SESSION['patCount']) ? $_SESSION['patCount'] : 0; ?>;
 
-function updateDropdown() {
-    var projectTypeSelect = document.getElementById('projectType');
-    var patOption = projectTypeSelect.querySelector('option[value="PAT"]');
-
-    if (patCount >= 2) {
-        patOption.style.display = 'none';
-        projectTypeSelect.value = 'In House';
-    } else {
-        patOption.style.display = '';
-    }
-}
-
-// Call the function when patCount reaches 2
-if (patCount >= 2) {
-    updateDropdown();
-}
-
-</script>
 
 
 
