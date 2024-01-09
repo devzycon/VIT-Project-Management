@@ -1321,8 +1321,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `faculty_id`) VALUES
 (5, 'kushkush', '$2y$10$pkgNOc0r6DaiDnCTIVT/VubRm0LqncpPgipzdARaH/9wZto.zmYLu', '2021-05-22 00:30:03', 0),
-(6, '123123', '$2y$10$AwA0obkWAdzF6Z6zCqZ3Xu5QinFNWhL89iAUde8YYfYorruaxOjCm', '2021-07-17 16:49:54', 0),
-(12, 'saravana', '$2y$10$HuIQhvulAudStqrvE0YUXO5b0saoAOE.2GgVIWwfnvoGR2ELqN/ni', '2024-01-09 15:39:33', 50007);
+(6, '123123', '$2y$10$AwA0obkWAdzF6Z6zCqZ3Xu5QinFNWhL89iAUde8YYfYorruaxOjCm', '2021-07-17 16:49:54', 0);
 
 --
 -- Indexes for dumped tables
