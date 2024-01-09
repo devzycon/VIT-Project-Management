@@ -65,6 +65,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
     $s_m3 = $_POST['s_m3'];
     $s_m4 = $_POST['s_m4'];
     $s_tot = $_POST['s_tot'];
+    $s_attendance = $_POST['s_attendance'];
             }
 
             $_SESSION['form_token'] = bin2hex(random_bytes(32));
@@ -196,13 +197,15 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
         <!-- Remove the following line for the Staff ID column -->
         <!-- <th class="text-center" scope="col">Staff Id</th> -->
         <th class="text-center" scope="col">STUDENT NAME</th>
+        <th class="text-center" scope="col">MARK</th>
+        <th class="text-center" scope="col">ATTENDENCE</th>
 		
     </tr>
 </thead>
 
 <?php
 
-$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot
+$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot, st.s_attendance
 FROM users u
 JOIN faculty_table fd ON u.faculty_id = fd.faculty_id
 JOIN student_table st ON fd.PANELNO = st.PANEL_NO
@@ -227,6 +230,7 @@ while($row = mysqli_fetch_array($run_data))
     $s_m3 = $row['s_m3'];
     $s_m4 = $row['s_m4'];
     $s_tot = $row['s_tot'];
+    $s_attendance = $row['s_attendance'];
     
     
 
@@ -257,12 +261,12 @@ while($row = mysqli_fetch_array($run_data))
                         <table class='table table-bordered table-striped table-hover custom-table '>
                         <thead>
                             <tr >
-                                <th class='text-center' scope='col'>Review 1</th>
-                                <th class='text-center' scope='col'>Knowledge on Research Domain</th>
-                                <th class='text-center' scope='col'>Literature Review</th>
-                                <th class='text-center' scope='col'>Proper Identification</th>
-                                <th class='text-center' scope='col'>Presentation Skills</th>
-                                <th class='text-center' scope='col'>Total</th>
+                                <th class='text-center' scope='col'>Review 1 (5 Marks)</th>
+                                <th class='text-center' scope='col'>Knowledge on Research Domain (5 Marks)</th>
+                                <th class='text-center' scope='col'>Literature Review (5 Marks)</th>
+                                <th class='text-center' scope='col'>Proper Identification (5 Marks)</th>
+                                <th class='text-center' scope='col'>Presentation Skills (5 Marks)</th>
+                                <th class='text-center' scope='col'>Total (20 Marks)</th>
                             </tr>
                         </thead>
                         <tr>
@@ -286,6 +290,7 @@ while($row = mysqli_fetch_array($run_data))
                             </td>
                         
                     </tr>
+                    
                         </table>
                         <input type='submit' name='submit' id='submitB' class='btn btn-info btn-large' value='Submit'>
                     </form>
@@ -299,6 +304,13 @@ while($row = mysqli_fetch_array($run_data))
             </div>
         </div>
         </div>
+    </td>
+    <td>
+    <select id='project_type' name='project_type' class='form-control'>
+              <option value='' selected></option>
+              <option value='Present' <?php echo ($s_attendance == 'Present') ? 'selected' : ''; ?>Present</option>
+              <option value='Absent' <?php echo ($s_attendance == 'Absent') ? 'selected' : ''; ?>Absent</option>
+              </select>
     </td>
 </tr>
 
