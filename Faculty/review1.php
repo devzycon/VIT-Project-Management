@@ -197,15 +197,15 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
         <!-- Remove the following line for the Staff ID column -->
         <!-- <th class="text-center" scope="col">Staff Id</th> -->
         <th class="text-center" scope="col">STUDENT NAME</th>
-        <th class="text-center" scope="col">MARK</th>
+        <th class="text-center" scope="col">REVIEW 1 MARK</th>
         <th class="text-center" scope="col">ATTENDENCE</th>
-		
+		<th class="text-center" scope="col">GUIDE APPROVAL</th>
     </tr>
 </thead>
 
 <?php
 
-$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot, st.s_attendance
+$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot, st.s_attendance, st.s_approval
 FROM users u
 JOIN faculty_table fd ON u.faculty_id = fd.faculty_id
 JOIN student_table st ON fd.PANELNO = st.PANEL_NO
@@ -231,6 +231,10 @@ while($row = mysqli_fetch_array($run_data))
     $s_m4 = $row['s_m4'];
     $s_tot = $row['s_tot'];
     $s_attendance = $row['s_attendance'];
+    $s_approval = $row['s_approval'];
+    $textboxDisabled = ($s_attendance === null || $s_attendance === 0) ? 'disabled' : '';
+
+    
     
     
 
@@ -242,7 +246,7 @@ while($row = mysqli_fetch_array($run_data))
     <td class='text-left'>$STUDENT_NAME</td>
     <td class='text-center'>
         <span>
-            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$REG_NO'>View</button>
+            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$REG_NO' $textboxDisabled>View</button>
         </span>
         <div class='modal fade' id='rev1$REG_NO' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
         <div class='modal-dialog modal-lg'>
@@ -305,23 +309,38 @@ while($row = mysqli_fetch_array($run_data))
         </div>
         </div>
     </td>
-    <td>
-    <select id='project_type' name='project_type' class='form-control'>
-              <option value='' selected></option>
-              <option value='Present' <?php echo ($s_attendance == 'Present') ? 'selected' : ''; ?>Present</option>
-              <option value='Absent' <?php echo ($s_attendance == 'Absent') ? 'selected' : ''; ?>Absent</option>
-              </select>
-    </td>
+    <td> <form action='review1_present.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
+    <select id='attendance_select' name='us_attendance' class='form-control'>
+        <option value='' selected></option>
+        <option value='1' " . ($s_attendance == '1' ? 'selected' : '') . ">Present</option>
+        <option value='0' " . ($s_attendance == '0' ? 'selected' : '') . ">Absent</option>
+    </select>
+    <br>
+    <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
+</form>
+        </td>
+        <td> <form action='review1_approval.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
+    <select id='approval_select' name='us_approval' class='form-control'>
+        <option value='' selected></option>
+        <option value='1' " . ($s_approval == '1' ? 'selected' : '') . ">YES</option>
+        <option value='0' " . ($s_approval == '0' ? 'selected' : '') . ">NO</option>
+    </select>
+    <br>
+    <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
+</form>
+        </td>
+
 </tr>
 
 
     ";
-
+    
 
 }
 
 
 
     ?>
+    
 
                 
