@@ -2,8 +2,10 @@
 <?php
 $host = "localhost";
 $user = "root";
+
 // password for remote sql
 $password = ""; 
+
 $database = "admission";
 
 $connection = mysqli_connect($host, $user, $password, $database);
