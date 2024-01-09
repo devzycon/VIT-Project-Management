@@ -48,7 +48,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (50178, 'Dr.', 'Appalaraju Muralidhar', 'PANEL-7'),
 (50183, 'Dr.', 'Ilakiyaselvan N', 'PANEL-8'),
 (50201, 'Dr.', 'Umitty Srinivasa Rao', 'PANEL-9'),
-(50239, 'Prof.', 'Khadar Nawas K', 'PANEL-10'),
+(52833, 'Prof.', 'Ilavendhan A', 'PANEL-10'),
 (50249, 'Dr.', 'Prakash B', 'PANEL-11'),
 (50250, 'Dr.', 'Maheswari S', 'PANEL-12'),
 (53387, 'Dr.', 'Anita Christaline J', 'PANEL-13'),
@@ -56,7 +56,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (50276, 'Dr.', 'B V A N S S Prabhakar Rao', 'PANEL-15'),
 (50289, 'Dr.', 'Premalatha M', 'PANEL-16'),
 (50301, 'Dr.', 'Rajkumar S', 'PANEL-17'),
-(50303, 'Dr.', 'Malathi G', 'PANEL-18'),
+(50185, 'Dr.', 'Sathyarajasekaran K', 'PANEL-18'),
 (50304, 'Dr.', 'Kumar R', 'PANEL-19'),
 (50307, 'Dr.', 'Priyaadharshini M', 'PANEL-20'),
 (50311, 'Dr.', 'Kanchana Devi V', 'PANEL-21'),
@@ -84,7 +84,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (50410, 'Dr.', 'Sandhya P', 'PANEL-43'),
 (50417, 'Dr.', 'Prassanna J', 'PANEL-44'),
 (50422, 'Dr.', 'Priyadarshini J', 'PANEL-45'),
-(50430, 'Dr.', 'R. Prabhakaran', 'PANEL-46'),
+(50239, 'Dr.', 'Khadar Nawas K', 'PANEL-46'),
 (50432, 'Dr.', 'Shola Usha Rani', 'PANEL-47'),
 (50435, 'Dr.', 'Karmel A', 'PANEL-48'),
 (50440, 'Dr.', 'Sridhar R', 'PANEL-49'),
@@ -101,7 +101,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (51325, 'Dr.', 'M. Prasad', 'PANEL-60'),
 (51327, 'Dr.', 'M. Braveen', 'PANEL-61'),
 (51328, 'Dr.', 'V. Muthumanikandan', 'PANEL-62'),
-(51329, 'Dr.', 'A. K Ilavarasi', 'PANEL-63'),
+(51947, 'Dr.', 'Rajakumar Arul', 'PANEL-63'),
 (51339, 'Dr.', 'SK Ayesha', 'PANEL-64'),
 (51344, 'Dr.', 'Radhika Selvamani', 'PANEL-65'),
 (51347, 'Dr.', 'Bhuvaneswari A', 'PANEL-66'),
@@ -122,7 +122,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (51668, 'Dr.', 'Bhanu Chander Balusa', 'PANEL-81'),
 (51669, 'Dr.', 'A Swaminathan', 'PANEL-82'),
 (51672, 'Dr.', 'Rishikeshan C A', 'PANEL-83'),
-(51673, 'Dr.', 'Sandeep Kumar Satapathy', 'PANEL-84'),
+(53398, 'Dr.', 'Shanthi V', 'PANEL-84'),
 (51677, 'Dr.', 'Vedhapriyavadhana', 'PANEL-85'),
 (51679, 'Dr.', 'Ganala Santoshi', 'PANEL-86'),
 (51680, 'Dr.', 'V. Sakthivel', 'PANEL-87'),
@@ -131,7 +131,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (51748, 'Dr.', 'K Pradeep', 'PANEL-90'),
 (51754, 'Dr.', 'Radha R', 'PANEL-91'),
 (51946, 'Dr.', 'T Kalaipriyan', 'PANEL-92'),
-(51947, 'Dr.', 'Rajakumar Arul', 'PANEL-93'),
+(51329, 'Dr.', 'A K Ilavarasi', 'PANEL-93'),
 (51948, 'Dr.', 'Sudha A', 'PANEL-94'),
 (51949, 'Dr.', 'Suganeshwari G', 'PANEL-95'),
 (51962, 'Dr.', 'Shruti Mishra', 'PANEL-96'),
@@ -147,9 +147,9 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (52232, 'Dr.', 'Abinaya S', 'PANEL-106'),
 (52245, 'Dr.', 'Sahaya Beni Prathiba B', 'PANEL-107'),
 (52247, 'Dr.', 'Tamilarasi K', 'PANEL-108'),
-(52250, 'Dr.', 'Trilok Nath Pandey', 'PANEL-109'),
+(52256, 'Dr.', 'Sathian', 'PANEL-109'),
 (52255, 'Dr.', 'Abirami S', 'PANEL-110'),
-(52256, 'Dr.', 'Sathian D', 'PANEL-111'),
+(52250, 'Dr.', 'Trilok Nath Pandey', 'PANEL-111'),
 (52261, 'Dr.', 'Bhavadharini R M', 'PANEL-112'),
 (52262, 'Dr.', 'Mercy Rajaselvi Beaulah P', 'PANEL-113'),
 (52263, 'Dr.', 'Om Kumar C U', 'PANEL-114'),
@@ -165,7 +165,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (52283, 'Dr.', 'Monica K M', 'PANEL-7'),
 (52284, 'Dr.', 'Brindha S', 'PANEL-8'),
 (52285, 'Dr.', 'Sandosh S', 'PANEL-9'),
-(52287, 'Dr.', 'M Revathi', 'PANEL-10'),
+(50430, 'Dr.', 'R Prabhakaran', 'PANEL-10'),
 (52288, 'Dr.', 'Renjith P N', 'PANEL-11'),
 (52291, 'Dr.', 'Aswiga R V', 'PANEL-12'),
 (52295, 'Dr.', 'Joshan Athanesious J', 'PANEL-13'),
@@ -173,7 +173,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (52303, 'Dr.', 'Reena Roy R', 'PANEL-15'),
 (52304, 'Dr.', 'Sureshkumar WI', 'PANEL-16'),
 (52309, 'Dr.', 'Smrithy G S', 'PANEL-17'),
-(52310, 'Dr.', 'Maria Anu V', 'PANEL-18'),
+(52353, 'Dr.', 'Yogesh C', 'PANEL-18'),
 (52312, 'Dr.', 'Kiruthika S', 'PANEL-19'),
 (52322, 'Dr.', 'Modigari Narendra', 'PANEL-20'),
 (52332, 'Dr.', 'Jaisakthi  S M', 'PANEL-21'),
@@ -191,7 +191,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (52346, 'Dr.', 'Mary Shamala L', 'PANEL-33'),
 (52349, 'Dr.', 'Senthil Kumar A M', 'PANEL-34'),
 (52350, 'Dr.', 'Asha Jerlin M', 'PANEL-35'),
-(52353, 'Dr.', 'Yogesh C', 'PANEL-36'),
+(52310, 'Dr.', 'Maria Anu', 'PANEL-36'),
 (52354, 'Dr.', 'Vinothini A', 'PANEL-37'),
 (52355, 'Dr.', 'Srinivasa Perumal R', 'PANEL-38'),
 (52361, 'Dr.', 'Raja Sree T', 'PANEL-39'),
@@ -201,7 +201,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (52799, 'Dr.', 'Benil T', 'PANEL-43'),
 (52823, 'Dr.', 'Ganesh N', 'PANEL-44'),
 (52825, 'Dr.', 'Vatchala S', 'PANEL-45'),
-(52833, 'Dr.', 'Ilavendhan A', 'PANEL-46'),
+(52287, 'Dr.', 'M Revathi', 'PANEL-46'),
 (52835, 'Dr.', 'Sujithra @ Kanmani R', 'PANEL-47'),
 (52836, 'Dr.', 'Vallidevi K', 'PANEL-48'),
 (52851, 'Dr.', 'S Jahangeer Sidiq', 'PANEL-49'),
@@ -218,7 +218,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (53025, 'Dr.', 'Palani Thanaraj K', 'PANEL-60'),
 (53027, 'Dr.', 'Sudheer Kumar E', 'PANEL-61'),
 (53029, 'Dr.', 'Kanimozhi S', 'PANEL-62'),
-(53030, 'Dr.', 'Deepa Nivethika S', 'PANEL-63'),
+(53116, 'Dr.', 'Madheswari K', 'PANEL-63'),
 (53034, 'Dr.', 'Elakiya E', 'PANEL-64'),
 (53035, 'Dr.', 'Christopher Columbus C', 'PANEL-65'),
 (53036, 'Dr.', 'Malathi D', 'PANEL-66'),
@@ -248,7 +248,7 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (53103, 'Dr.', 'Padmanaban R ', 'PANEL-90'),
 (53104, 'Dr.', 'Raja M', 'PANEL-91'),
 (53105, 'Dr.', 'Balasaraswathi V R', 'PANEL-92'),
-(53116, 'Dr.', 'Madheswari K ', 'PANEL-93'),
+(53030, 'Dr.', 'Deepa Nivethika S', 'PANEL-93'),
 (53124, 'Dr.', 'Subitha D', 'PANEL-94'),
 (53125, 'Dr.', 'Kanthimathi S', 'PANEL-95'),
 (53126, 'Dr.', 'Kabilan K', 'PANEL-96'),
@@ -264,18 +264,22 @@ INSERT INTO `faculty_table` (`faculty_id`, `Pfix`, `Name_of_the_Faculty`, `PANEL
 (53154, 'Dr.', 'Rama Parvathy L', 'PANEL-106'),
 (53157, 'Dr.', 'P. Saravanan', 'PANEL-107'),
 (53159, 'Dr.', 'Renuka Devi R', 'PANEL-108'),
-(53160, 'Dr.', 'Poonkodi M', 'PANEL-109'),
+(53164, 'Dr.', 'A.B.Ahadit', 'PANEL-109'),
 (53161, 'Dr.', 'Prem Sankar N', 'PANEL-110'),
-(53164, 'Dr.', 'A.B.Ahadit', 'PANEL-111'),
+(53160, 'Dr.', 'Poonkodi M', 'PANEL-111'),
 (53166, 'Dr.', 'Marimuthu M', 'PANEL-112'),
 (53343, 'Dr.', 'Lekshmi K', 'PANEL-113'),
 (53353, 'Dr.', 'Prabu S', 'PANEL-114'),
 (70017, 'Dr.', 'Vaidehi Vijayakumar', 'PANEL-115'),
 (53368, 'Prof.', 'Logeswari G', 'PANEL-116'),
-(53376, 'Prof.', 'Nivethitha V', 'PANEL-117');
-
+(53376, 'Prof.', 'Nivethitha V', 'PANEL-117'),
+(52200, 'Dr.', 'Priyadarshini R', 'PANEL-118'),
+(52325, 'Dr.', 'Mansoor Hussain D', 'PANEL-118'),
+(52239, 'Dr.', 'Padmavathy T V', 'PANEL-119'),
+(53018, 'Dr.', 'B. Lakshmi Priya', 'PANEL-119'),
+(50177, 'Dr.', 'Thomas Abraham J V ', 'PANEL-120'),
+(50388, 'Prof.', 'Christy Jackson J', 'PANEL-120');
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `student_data`
 --
@@ -330,6 +334,7 @@ CREATE TABLE `student_table` (
 --
 -- Dumping data for table `student_table`
 --
+
 
 INSERT INTO `student_table` (`SNO`, `PGM`, `REG_NO`, `STUDENT_NAME`, `_ERP_ID`, `GUIDE_NAME`, `PANEL_NO`, `s_m1`, `s_m2`, `s_m3`, `s_m4`, `s_tot`, `s_attendance`, `s_approval`) VALUES
 (1, 'BCE', '19BCE1787', 'MAHITH KUMAR V', 52303, 'REENA ROY R', 'PANEL-1', 0, 0, 0, 0, 0, NULL, NULL),
@@ -1294,6 +1299,7 @@ INSERT INTO `student_table` (`SNO`, `PGM`, `REG_NO`, `STUDENT_NAME`, `_ERP_ID`, 
 (958, 'BCE', '20BCE1287', 'KUMAR SIDDHARTH', 50767, 'SWEETLIN HEMALATHA C', 'PANEL-120', 0, 0, 0, 0, 0, NULL, NULL),
 (0, '', '', '', 0, '', '', 5, 0, 0, 0, 5, NULL, NULL),
 (0, '', '', '', 0, '', '', 5, 0, 0, 0, 5, NULL, NULL);
+
 
 -- --------------------------------------------------------
 
