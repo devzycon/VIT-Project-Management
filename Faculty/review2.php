@@ -197,7 +197,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
         <!-- Remove the following line for the Staff ID column -->
         <!-- <th class="text-center" scope="col">Staff Id</th> -->
         <th class="text-center" scope="col">STUDENT NAME</th>
-        <th class="text-center" scope="col">REVIEW 1 MARK</th>
+        <th class="text-center" scope="col">REVIEW 2 MARK</th>
         <th class="text-center" scope="col">ATTENDENCE</th>
 		<th class="text-center" scope="col">GUIDE APPROVAL</th>
     </tr>
@@ -205,10 +205,10 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
 
 <?php
 
-$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot, st.s_attendance, st.s_approval
+$get_data = "SELECT u.faculty_id, u.username, st.REG_NO, st.STUDENT_NAME,st.s_m1, st.s_m2, st.s_m3, st.s_m4, st.s_tot, st.s_attendence, st.s_approval
 FROM users u
 JOIN faculty_table fd ON u.faculty_id = fd.faculty_id
-JOIN student_table st ON fd.PANELNO = st.PANEL_NO
+JOIN student_table_2 st ON fd.PANELNO = st.PANEL_NO
 WHERE u.faculty_id = ? AND fd.faculty_id = ? AND st.PANEL_NO IS NOT NULL";
 if ($stmt = mysqli_prepare($connection, $get_data)) {
     mysqli_stmt_bind_param($stmt, "ii", $faculty_id, $faculty_id);
@@ -230,7 +230,7 @@ while($row = mysqli_fetch_array($run_data))
     $s_m3 = $row['s_m3'];
     $s_m4 = $row['s_m4'];
     $s_tot = $row['s_tot'];
-    $s_attendance = $row['s_attendance'];
+    $s_attendance = $row['s_attendence'];
     $s_approval = $row['s_approval'];
     $textboxDisabled = ($s_attendance === null || $s_attendance === 0) ? 'disabled' : '';
 
@@ -261,13 +261,13 @@ while($row = mysqli_fetch_array($run_data))
                     <div class='container' id='profile'> 
                         <div class='row'>
                         <div class='col-md-5 offset-md-2' style = 'padding = 50px'>
-                        <form action='review1_mark.php?REG_NO=$REG_NO' id='reviewForm' method='post' enctype='multipart/form-data'>
+                        <form action='review2_mark.php?REG_NO=$REG_NO' id='reviewForm' method='post' enctype='multipart/form-data'>
                         <table class='table table-bordered table-striped table-hover custom-table '>
                         <thead>
                             <tr >
-                                <th class='text-center' scope='col'>Review 1</th>
+                                <th class='text-center' scope='col'>Review 2</th>
                                 <th class='text-center' scope='col'>Knowledge on Research Domain (5 Marks)</th>
-                                <th class='text-center' scope='col'>Literature Review (5 Marks)</th>
+                                <th class='text-center' scope='col'>Problem Statement (5 Marks)</th>
                                 <th class='text-center' scope='col'>Proper Identification (5 Marks)</th>
                                 <th class='text-center' scope='col'>Presentation Skills (5 Marks)</th>
                                 <th class='text-center' scope='col'>Total (20 Marks)</th>
@@ -309,7 +309,7 @@ while($row = mysqli_fetch_array($run_data))
         </div>
         </div>
     </td>
-    <td> <form action='review1_present.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
+    <td> <form action='review2_present.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
     <select id='attendance_select' name='us_attendance' class='form-control'>
         <option value='' selected></option>
         <option value='1' " . ($s_attendance == '1' ? 'selected' : '') . ">Present</option>
@@ -319,7 +319,7 @@ while($row = mysqli_fetch_array($run_data))
     <input type='submit' name='submit' class='btn btn-info btn-large' value='Submit'>
 </form>
         </td>
-        <td> <form action='review1_approval.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
+        <td> <form action='review2_approval.php?REG_NO=$REG_NO' method='post' enctype='multipart/form-data'>
     <select id='approval_select' name='us_approval' class='form-control'>
         <option value='' selected></option>
         <option value='1' " . ($s_approval == '1' ? 'selected' : '') . ">YES</option>

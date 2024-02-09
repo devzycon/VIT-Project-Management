@@ -65,7 +65,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
                 $u_review_1 = $_POST['review_1'];
                 $u_review_2 = $_POST['review_2'];
                 $project_name = $_POST['projectName'];
-                $u_attendance = $_POST['attendance'];
+                $u_attendance = $_POST['attendence'];
                 $no_of_present = $_POST['no_of_present'];
                 
 
@@ -188,6 +188,7 @@ if ($stmt = mysqli_prepare($connection, $sql)) {
 
   
   <a href="review1.php" class="btn btn-success"><i class="fa lo"></i> Review 1</a>
+  <a href="review2.php" class="btn btn-success"><i class="fa lo"></i> Review 2</a>
 
 <!-- Display area for student details -->
 <div id="student_details"></div>
@@ -222,8 +223,8 @@ $('#review_1_button').on('click', function() {
         <th class="text-center" scope="col">Review 2</th>
         <th class="text-center" scope="col">Edit</th>
         <th class="text-center" scope="col">Project Name</th>
-        <th class="text-center" scope="col">Attendance</th>
-        <th class="text-center" scope="col">Enter Attendance</th>
+        <th class="text-center" scope="col">Attendence</th>
+        <th class="text-center" scope="col">Enter Attendence</th>
         <!-- <th class="text-center" scope="col">Delete</th> -->
     </tr>
 </thead>
@@ -238,21 +239,21 @@ $('#review_1_button').on('click', function() {
                 $sl = ++$i;
                 $id = $row['id'];
                 $u_card = $row['u_card'];
-                $u_f_name = $row['u_f_name'];
-                $u_l_name = $row['u_l_name'];
+                $u_f_name = $row['u_name'];
+                
 				        $u_phone = $row['u_phone'];
                 $u_email = $row['u_email'];
 				        $u_project_type = $row['u_project_type'];
                 $u_review_0 = $row['review_0'];
                 $project_name = $row['project_name'];
-                $u_attendance = $row['attendance'];
+                $u_attendance = $row['attendence'];
                 $no_of_present = $row['no_of_present'];
                 // $u_review_0 = isset($_POST['review_0']) ? $_POST['review_0'] : "";
                 // $u_review_1 = isset($_POST['review_1']) ? $_POST['review_1'] : ""; CAN BE TAKEN CARE OF LATER.
                 // $u_review_2 = isset($_POST['review_2']) ? $_POST['review_2'] : "";
                 $buttonDisabled = empty($u_review_0) ? '' : 'disabled';
                 $textboxDisabled = empty($u_review_0) ? '' : 'disabled';
-                $start_date = strtotime('2024-01-06');
+                $start_date = strtotime('2024-02-09');
                 $current_date = time();
                 $days_difference = floor(($current_date - $start_date) / (60 * 60 * 24));
                 if ($days_difference == 0) {
@@ -264,7 +265,7 @@ $('#review_1_button').on('click', function() {
         		echo "
 				<tr>
 				<td class='text-center' id='serial'>$sl</td>
-				<td class='text-left'>$u_f_name   $u_l_name</td>
+				<td class='text-left'>$u_f_name</td>
 				<td class='text-left'>$u_card</td>
 				<td class='text-left'>$u_phone</td>
         <td class='text-center'>$u_email</td>
@@ -298,7 +299,7 @@ $('#review_1_button').on('click', function() {
                                         </tr>
                                     </thead>
                                       <tr>
-                                        <td class='text-left'>$u_f_name   $u_l_name</td>
+                                        <td class='text-left'>$u_f_name</td>
                                         <td class='text-left'>$u_card</td>
                                         <td class='text-left'>$u_phone</td>
                                                 <td class='text-center'>$u_email</td>
@@ -360,10 +361,7 @@ $('#review_1_button').on('click', function() {
           <label for='firstname'>First Name</label>
           <input type='text' class='form-control' name='user_first_name' placeholder='Enter First Name' value='$u_f_name'>
           </div>
-          <div class='form-group col-md-6'>
-          <label for='lastname'>Last Name</label>
-          <input type='text' class='form-control' name='user_last_name' placeholder='Enter Last Name' value='$u_l_name'>
-          </div>
+          
           </div>
           
       
@@ -431,12 +429,12 @@ $('#review_1_button').on('click', function() {
                           <table class='table table-bordered table-striped table-hover custom-table'>
                               <tr>
                                 <th>DAY</th>
-                                <th>Attendance</th>
+                                <th>Attendence</th>
                               </tr>
                               <tr>
                                 <td>Monday</td>
                                 <td>
-                                  <select name='attendance[Monday]' class='form-control' >
+                                  <select name='attendence[Monday]' class='form-control' >
                                     <option value='Present'>Present</option>
                                     <option value='Absent'>Absent</option>
                                   </select>
@@ -445,7 +443,7 @@ $('#review_1_button').on('click', function() {
                               <tr>
                                 <td>Tuesday</td>
                                 <td>
-                                  <select name='attendance[Tuesday]' class='form-control' >
+                                  <select name='attendence[Tuesday]' class='form-control' >
                                     <option value='Present'>Present</option>
                                     <option value='Absent'>Absent</option>
                                   </select>
@@ -454,7 +452,7 @@ $('#review_1_button').on('click', function() {
                               <tr>
                                 <td>Wednesday</td>
                                 <td>
-                                  <select name='attendance[Wednesday]' class='form-control' >
+                                  <select name='attendence[Wednesday]' class='form-control' >
                                     <option value='Present'>Present</option>
                                     <option value='Absent'>Absent</option>
                                   </select>
@@ -463,7 +461,7 @@ $('#review_1_button').on('click', function() {
                               <tr>
                                 <td>Thursday</td>
                                 <td>
-                                  <select name='attendance[Thursday]' class='form-control' >
+                                  <select name='attendence[Thursday]' class='form-control' >
                                     <option value='Present'>Present</option>
                                     <option value='Absent'>Absent</option>
                                   </select>
@@ -472,7 +470,7 @@ $('#review_1_button').on('click', function() {
                               <tr>
                                 <td>Friday</td>
                                 <td>
-                                  <select name='attendance[Friday]' class='form-control' >
+                                  <select name='attendence[Friday]' class='form-control' >
                                     <option value='Present'>Present</option>
                                     <option value='Absent'>Absent</option>
                                   </select>
@@ -518,11 +516,11 @@ $('#review_1_button').on('click', function() {
         console.log(response); // Log the entire response object for debugging
         if (response.success) {
           $('#viewatt' + id + ' h2 b').text('WEEK ' + response.weekCount);
-          alert('Attendance updated successfully');
-          console.log('Updating attendance cell:', '#attendanceCell' + id);
+          alert('attendence updated successfully');
+          console.log('Updating attendence cell:', '#attendanceCell' + id);
           $('#attendanceCell' + id).html(response.newAttendance);
         } else {
-          alert('Error updating attendance: ' + response.message);
+          alert('Error updating attendence: ' + response.message);
         }
       },
       error: function(error) {
@@ -893,11 +891,7 @@ $u_project_type = isset($u_project_type) ? $u_project_type : "Select"; // Set to
 <label for="firstname">First Name</label>
 <input type="text" class="form-control" name="user_first_name" placeholder="Enter First Name">
 </div>
-<div class="form-group col-md-6">
-<label for="lastname">Last Name</label>
-<input type="text" class="form-control" name="user_last_name" placeholder="Enter Last Name">
-</div>
-</div>
+
 
 
 
@@ -952,8 +946,8 @@ $run_data = mysqli_query($connection, $get_data);
 while ($row = mysqli_fetch_array($run_data)) {
     $id = $row['id'];
     $card = $row['u_card'];
-    $name = $row['u_f_name'];
-    $name2 = $row['u_l_name'];
+    $name = $row['u_name'];
+    
     $email = $row['u_email'];
     $phone = $row['u_phone'];
     $project = $row['u_project_type'];
@@ -989,8 +983,7 @@ while ($row = mysqli_fetch_array($run_data)) {
           <input type='text' class='form-control' name='user_first_name' placeholder='Enter First Name' value='$name'>
           </div>
           <div class='form-group col-md-6'>
-          <label for='lastname'>Last Name</label>
-          <input type='text' class='form-control' name='user_last_name' placeholder='Enter Last Name' value='$name2'>
+          
           </div>
           </div>
           
