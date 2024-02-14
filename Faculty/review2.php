@@ -232,7 +232,7 @@ while($row = mysqli_fetch_array($run_data))
     $s_tot = $row['s_tot'];
     $s_attendance = $row['s_attendence'];
     $s_approval = $row['s_approval'];
-    $textboxDisabled = ($s_attendance === null || $s_attendance === 0) ? 'disabled' : '';
+    
 
     
     
@@ -246,7 +246,7 @@ while($row = mysqli_fetch_array($run_data))
     <td class='text-left'>$STUDENT_NAME</td>
     <td class='text-center'>
         <span>
-            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$REG_NO' $textboxDisabled>View</button>
+            <button class='btn btn-primary view-button' data-toggle='modal' type='button' id='submitBtn' data-target='#rev1$REG_NO' >View</button>
         </span>
         <div class='modal fade' id='rev1$REG_NO' tabindex='-1' role='dialog' aria-labelledby='userViewModalLabel' aria-hidden='true'>
         <div class='modal-dialog modal-lg'>
@@ -341,6 +341,3 @@ while($row = mysqli_fetch_array($run_data))
 
 
     ?>
-    
-
-                
